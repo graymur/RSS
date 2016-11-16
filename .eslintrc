@@ -1,0 +1,40 @@
+{
+    "parser": "babel-eslint",
+    "extends": [
+        "standard",
+        "standard-react"
+    ],
+    "plugins": [],
+    "env": {
+        "browser": true
+    },
+    "globals": {
+        "__DEV__": false,
+        "__PROD__": false,
+        "__DEBUG__": false,
+        "__DEBUG_NEW_WINDOW__": false,
+        "__BASENAME__": false
+    },
+    "rules": {
+        "semi": [2, "always"],
+        "space-infix-ops": 0,
+        "indent": [0, 4],
+        "space-before-function-paren": 0,
+        "spaced-comment": 0,
+        "space-in-parens": 0,
+        "eol-last": 0,
+        "react/prop-types": 0,
+        "react/jsx-no-bind": 0,
+
+        "quotes": 0,
+        "comma-dangle": 0,
+        "no-undef": 0,
+        "jsx-quotes": 0,
+        "operator-linebreak": 0,
+        "react/jsx-indent": 0,
+        "react/jsx-indent-props": 0,
+        "react/jsx-space-before-closing": 0,
+        "react/self-closing-comp": 0,
+        "comma-spacing": 0
+    }
+}
