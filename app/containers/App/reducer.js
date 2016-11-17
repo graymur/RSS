@@ -1,9 +1,22 @@
 import { fromJS } from 'immutable';
 
-const initialState = fromJS({});
+import * as constants from './constants.js';
+
+const initialState = fromJS({
+    loading: false
+});
 
 function appReducer(state = initialState, action = {}) {
-    return initialState;
+    switch (action.type) {
+        case constants.LOADING_START:
+            return state.set('loading', true);
+
+        case constants.LOADING_END:
+            return state.set('loading', false);
+
+        default:
+            return state;
+    }
 }
 
 export default appReducer;

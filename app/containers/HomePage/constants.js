@@ -1,1 +1,3 @@
-
+export const LOAD_FEEDS = 'LOAD_FEEDS';
+export const LOAD_FEEDS_SUCCESS = 'LOAD_FEEDS_SUCCESS';
+export const LOAD_FEEDS_FAILURE = 'LOAD_FEEDS_FAILURE';

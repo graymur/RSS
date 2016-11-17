@@ -9,8 +9,9 @@ import * as constants from './constants.js';
 
 import api from 'utils/api.js';
 
-import request from 'utils/request';
-
+/**
+ * Check feed
+ */
 function* checkFeed(action) {
     try {
         const result = yield call(api.checkFeed, action.url);
@@ -29,6 +30,10 @@ function* checkFeedSaga() {
     yield* takeEvery(constants.CHECK_FEED, checkFeed);
 }
 
+/**
+ * Save feed
+ * @param action
+ */
 function* saveFeed(action) {
     try {
         const result = yield call(api.saveFeed, action.feed);

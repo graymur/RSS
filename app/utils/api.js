@@ -13,12 +13,19 @@ function makeRequest(endpoint, data = {}, config = {}) {
         config.headers = { 'Content-Type': 'application/json' };
     }
 
-    console.log(config);
-
     return request(url, config);
 }
 
 export default {
     checkFeed: url => makeRequest('check', { url }),
-    saveFeed: data => makeRequest('save', data, { method: 'PUT' })
+    saveFeed: data => makeRequest('save', data, { method: 'PUT' }),
+    fetchFeeds: () => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve();
+            }, 3000);
+        });
+
+        //return makeRequest('feeds');
+    }
 }
