@@ -1,5 +1,5 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+//import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 //import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -47,7 +47,7 @@ export class FormPage extends React.Component { // eslint-disable-line react/pre
             url: this.state.feedUrl,
             title: this.state.feedTitle,
             realTitle: this.props.data.realTitle
-        })
+        });
     }
 
     checkFeed(e) {
@@ -63,8 +63,8 @@ export class FormPage extends React.Component { // eslint-disable-line react/pre
     render() {
         const { loading, data, error, saved } = this.props;
 
-        const showStyle = { display: data && data.title ? 'block' : 'none'};
-        const hideStyle = { display: data && data.title ? 'none' : 'block'};
+        const showStyle = { display: data && data.title ? 'block' : 'none' };
+        const hideStyle = { display: data && data.title ? 'none' : 'block' };
 
         return (
             <div className={styles.form}>
@@ -74,7 +74,7 @@ export class FormPage extends React.Component { // eslint-disable-line react/pre
                         <input type="url" className="form-control" id="feedUrl" name="feedUrl" placeholder="Feed URL" value={this.state.feedUrl} onChange={this.handleUrlChange}/>
                     </div>
                     <div className="form-group" style={hideStyle}>
-                        <button className={styles['button'] + ' btn btn-default'} onClick={this.checkFeed} disabled={loading || !this.state.feedUrl.length }>Check feed</button>
+                        <button className={styles['button'] + ' btn btn-default'} onClick={this.checkFeed} disabled={loading || !this.state.feedUrl.length}>Check feed</button>
                         {loading ? <Loader size={34}/> : null}
                     </div>
                     <div className="form-group" style={showStyle}>

@@ -8,7 +8,7 @@ const selectGlobal = () => (state) => state.get('global');
 
 const selectCurrentUser = () => createSelector(
     selectGlobal(),
-    (globalState) => globalState.get('currentUser')
+    (globalState) => globalState.get('user')
 );
 
 const selectLoading = () => createSelector(

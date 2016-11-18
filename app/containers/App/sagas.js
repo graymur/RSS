@@ -2,8 +2,8 @@
  * Gets the repositories of the user from Github
  */
 
-import { takeEvery } from 'redux-saga';
-import { call, put } from 'redux-saga/effects';
+//import { takeEvery } from 'redux-saga';
+//import { call, put } from 'redux-saga/effects';
 
 //import * as constants from './constants.js';
 

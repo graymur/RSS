@@ -27,7 +27,7 @@ function* checkFeed(action) {
 }
 
 function* checkFeedSaga() {
-    yield* takeEvery(constants.CHECK_FEED, checkFeed);
+    yield * takeEvery(constants.CHECK_FEED, checkFeed);
 }
 
 /**
@@ -49,7 +49,7 @@ function* saveFeed(action) {
 }
 
 function* saveFeedSaga() {
-    yield* takeEvery(constants.SAVE_FEED, saveFeed);
+    yield * takeEvery(constants.SAVE_FEED, saveFeed);
 }
 
 export default [checkFeedSaga, saveFeedSaga];

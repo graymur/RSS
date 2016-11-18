@@ -36,6 +36,15 @@ module.exports = {
             {
                 test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
                 loader: 'null-loader'
+            }, {
+                test: /\.(scss|sass)$/,
+                loaders: [
+                    'style',
+                    'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+                    'postcss',
+                    //'resolve-url',
+                    'sass-loader'
+                ]
             }
         ]
     },
@@ -49,7 +58,20 @@ module.exports = {
             'process.env': {
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV)
             }
-        })],
+        }),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                postcss: [
+                    require('autoprefixer')({
+                        browsers: ['last 2 versions', 'safari 8', 'android 4'],
+                        remove: false
+                    }),
+                    require('css-mqpacker')()
+                ]
+            }
+        })
+    ],
+
 
     // Some node_modules pull in Node-specific dependencies.
     // Since we're running in a browser we have to stub them out. See:

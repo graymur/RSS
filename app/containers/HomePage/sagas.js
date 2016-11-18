@@ -29,7 +29,7 @@ function* fetchFeeds(action) {
 }
 
 function* fetchFeedsSaga() {
-    yield* takeLatest(constants.LOAD_FEEDS, fetchFeeds);
+    yield * takeLatest(constants.LOAD_FEEDS, fetchFeeds);
 }
 
 export default [fetchFeedsSaga];

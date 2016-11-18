@@ -1,5 +1,5 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+//import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
 import Feeds from 'components/Feeds/Feeds.js';
@@ -20,7 +20,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
     }
 
     render() {
-        const feeds = [];
+        //const feeds = [];
         return (
             <div className={styles.content}>
                 <Feeds />

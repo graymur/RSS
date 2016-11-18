@@ -39,9 +39,9 @@
     "lint:eslint": "eslint",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
-    "pretest": "npm run test:clean && npm run lint",
+    "__pretest__": "npm run test:clean && npm run lint",
+    "test": "better-npm-run test",
     "test:clean": "rimraf ./coverage",
-    "test": "cross-env NODE_ENV=test karma start internals/testing/karma.conf.js --single-run",
     "test:watch": "npm run test -- --auto-watch --no-single-run",
     "test:firefox": "npm run test -- --browsers Firefox",
     "test:safari": "npm run test -- --browsers Safari",
@@ -71,6 +71,12 @@
       "command": "webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress",
       "env": {
         "NODE_ENV": "production"
+      }
+    },
+    "test": {
+      "command": "karma start internals/testing/karma.conf.js --single-run",
+      "env": {
+        "NODE_ENV": "test"
       }
     }
   },
