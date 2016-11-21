@@ -14,7 +14,7 @@ import * as constants from './constants.js';
 
 import { fromJS } from 'immutable';
 
-const initialState = fromJS({
+export const initialState = fromJS({
     valid: null,
     loading: false,
     error: false,
