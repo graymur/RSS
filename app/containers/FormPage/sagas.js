@@ -12,21 +12,21 @@ import api from 'utils/api.js';
 /**
  * Check feed
  */
-function* checkFeed(action) {
+export function* checkFeed(action) {
     try {
-        const result = yield call(api.checkFeed, action.url);
+        const data = yield call(api.checkFeed, action.url);
 
-        if (result.error) {
-            throw new Error(result.error);
+        if (data.error) {
+            throw new Error(data.error);
         }
 
-        yield put({ type: constants.CHECK_FEED_SUCCESS, data: result });
+        yield put({ type: constants.CHECK_FEED_SUCCESS, data });
     } catch (e) {
         yield put({ type: constants.CHECK_FEED_FAILURE, error: e });
     }
 }
 
-function* checkFeedSaga() {
+export function* checkFeedSaga() {
     yield * takeEvery(constants.CHECK_FEED, checkFeed);
 }
 
@@ -34,21 +34,21 @@ function* checkFeedSaga() {
  * Save feed
  * @param action
  */
-function* saveFeed(action) {
+export function* saveFeed(action) {
     try {
-        const result = yield call(api.saveFeed, action.feed);
+        const data = yield call(api.saveFeed, action.feed);
 
-        if (result.error) {
-            throw new Error(result.error);
+        if (data.error) {
+            throw new Error(data.error);
         }
 
-        yield put({ type: constants.SAVE_FEED_SUCCESS, data: result });
+        yield put({ type: constants.SAVE_FEED_SUCCESS, data });
     } catch (e) {
         yield put({ type: constants.SAVE_FEED_FAILURE, error: e });
     }
 }
 
-function* saveFeedSaga() {
+export function* saveFeedSaga() {
     yield * takeEvery(constants.SAVE_FEED, saveFeed);
 }
 

@@ -18,7 +18,7 @@ import {
 
 const initialState = fromJS({ reduced: 'soon' });
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case 'TEST':
       return state.set('reduced', action.payload);
