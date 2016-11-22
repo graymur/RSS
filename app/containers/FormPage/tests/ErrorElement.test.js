@@ -13,7 +13,6 @@ describe('<ErrorElement />', () => {
 
     it('should have a className attribute', () => {
         const renderedComponent = shallow(<ErrorElement error="error" />);
-        console.log(renderedComponent.prop('className'));
         expect(renderedComponent.prop('className')).toEqual(styles.error);
     });
 

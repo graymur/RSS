@@ -20,8 +20,9 @@ function* fetchFeeds(action) {
             throw new Error(result.error);
         }
 
-        yield put({ type: constants.LOAD_FEEDS_SUCCESS, data: result });
+        yield put({ type: constants.LOAD_FEEDS_SUCCESS, feeds: result });
     } catch (e) {
+        console.log('ERROR', e);
         yield put({ type: constants.LOAD_FEEDS_FAILURE, error: e });
     } finally {
         yield put({ type: appConstants.LOADING_END });

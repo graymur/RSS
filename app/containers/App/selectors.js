@@ -1,24 +1,20 @@
-/**
- * The global state selectors
- */
-
 import { createSelector } from 'reselect';
 
-const selectGlobal = () => (state) => state.get('global');
+const selectGlobal = () => state => state.get('global');
 
 const selectCurrentUser = () => createSelector(
     selectGlobal(),
-    (globalState) => globalState.get('user')
+    globalState => globalState.get('user')
 );
 
 const selectLoading = () => createSelector(
     selectGlobal(),
-    (globalState) => globalState.get('loading')
+    globalState => globalState.get('loading')
 );
 
 const selectError = () => createSelector(
     selectGlobal(),
-    (globalState) => globalState.get('error')
+    globalState => globalState.get('error')
 );
 
 const selectLocationState = () => {

@@ -19,13 +19,5 @@ function makeRequest(endpoint, data = {}, config = {}) {
 export default {
     checkFeed: url => makeRequest('check', { url }),
     saveFeed: data => makeRequest('save', data, { method: 'PUT' }),
-    fetchFeeds: () => {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve();
-            }, 3000);
-        });
-
-        //return makeRequest('feeds');
-    }
+    fetchFeeds: () => makeRequest('feeds')
 };

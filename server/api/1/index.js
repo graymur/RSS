@@ -67,6 +67,7 @@ const GroupModel = require('./models/group.js').model;
 
 router.use(require('./middleware/user.js'));
 
+router.get('/feeds', require('./endpoints/feeds.js'));
 router.get('/check', require('./endpoints/check.js'));
 router.get('/fetch', require('./endpoints/fetch.js'));
 router.put('/save', require('./endpoints/save.js'));

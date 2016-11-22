@@ -1,10 +1,13 @@
 import React from 'react';
 //import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import Feeds from 'components/Feeds/Feeds.js';
 import Feed from 'components/Feed/Feed.js';
 import Post from 'components/Post/Post.js';
+
+import * as selectors from './selectors.js';
 
 import { fetchFeeds } from './actions.js';
 
@@ -12,7 +15,9 @@ import styles from './home.sass';
 
 export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
     fetchFeeds() {
-        this.props.fetchFeeds();
+        if (!this.props.feeds.length) {
+            this.props.fetchFeeds();
+        }
     }
 
     componentWillMount() {
@@ -20,10 +25,10 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
     }
 
     render() {
-        //const feeds = [];
+        const { feeds } = this.props;
         return (
             <div className={styles.content}>
-                <Feeds />
+                <Feeds feeds={feeds} />
                 <Feed />
                 <Post />
             </div>
@@ -31,14 +36,10 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
     }
 }
 
-//const mapStateToProps = createStructuredSelector({
-//    //loading: selectors.selectLoading(),
-//    //valid: selectors.selectLoading(),
-//    //error: selectors.selectError(),
-//    //data: selectors.selectData(),
-//    //saved: selectors.selectSaved()
-//});
+const mapStateToProps = createStructuredSelector({
+    feeds: selectors.selectFeeds()
+});
 
-export default connect(() => ({}), {
+export default connect(mapStateToProps, {
     fetchFeeds
 })(HomePage);
