@@ -56,7 +56,7 @@
       }
     },
     "nodemon": {
-      "command": "nodemon server",
+      "command": "nodemon server --ignore 'app/*.js'",
       "env": {
         "NODE_ENV": "development"
       }

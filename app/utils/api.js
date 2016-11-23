@@ -19,5 +19,6 @@ function makeRequest(endpoint, data = {}, config = {}) {
 export default {
     checkFeed: url => makeRequest('check', { url }),
     saveFeed: data => makeRequest('save', data, { method: 'PUT' }),
-    fetchFeeds: () => makeRequest('feeds')
+    fetchFeeds: () => makeRequest('feeds'),
+    fetchFeed: id => makeRequest('feed', { id })
 };

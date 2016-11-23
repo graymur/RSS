@@ -9,7 +9,7 @@ import Post from 'components/Post/Post.js';
 
 import * as selectors from './selectors.js';
 
-import { fetchFeeds } from './actions.js';
+import { fetchFeeds, fetchFeed, updateFeed } from './actions.js';
 
 import styles from './home.sass';
 
@@ -25,11 +25,12 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
     }
 
     render() {
-        const { feeds } = this.props;
+        const { feeds, currentFeed, fetchFeed, updateFeed, postsLoading, posts } = this.props;
+
         return (
             <div className={styles.content}>
-                <Feeds feeds={feeds} />
-                <Feed />
+                <Feeds feeds={feeds} currentFeed={currentFeed} onFeedClick={fetchFeed} />
+                <Feed loading={postsLoading} currentFeed={currentFeed} onUpdateFeed={updateFeed} posts={posts} />
                 <Post />
             </div>
         );
@@ -37,9 +38,14 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
 }
 
 const mapStateToProps = createStructuredSelector({
-    feeds: selectors.selectFeeds()
+    feeds: selectors.selectFeeds(),
+    postsLoading: selectors.selectPostsLoading(),
+    posts: selectors.selectPosts(),
+    currentFeed: selectors.selectCurrentFeed()
 });
 
 export default connect(mapStateToProps, {
-    fetchFeeds
+    fetchFeeds,
+    fetchFeed,
+    updateFeed
 })(HomePage);

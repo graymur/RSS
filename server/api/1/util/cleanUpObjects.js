@@ -8,6 +8,7 @@ function cleanUp(arg) {
             return cleanUp(item);
         }
     } else {
+        arg.id = arg._id;
         delete arg._id;
         delete arg.__v;
         delete arg.user;

@@ -6,12 +6,11 @@ import styles from './feeds.sass';
 
 class Group extends React.Component {
     render() {
-        const { title, feeds } = this.props;
-        console.log(this.props);
+        const { title, feeds, onFeedClick, currentFeed } = this.props;
         return (
             <div className={styles.feeds__group}>
                 <h5 className={styles.feeds__group__title}>{title}</h5>
-                {feeds.map((feed, index) => <Item {...feed} key={index} />)}
+                {feeds.map((feed, index) => <Item key={index} {...feed} currentFeed={currentFeed} onFeedClick={onFeedClick} />)}
             </div>
         );
     }
