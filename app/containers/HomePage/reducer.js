@@ -3,9 +3,10 @@ import { fromJS } from 'immutable';
 import * as constants from './constants.js';
 
 const initialState = fromJS({
+    groups: [],
     feeds: [],
-    currentFeed: {},
     posts: [],
+    currentFeed: {},
     currentPost: {},
     postsLoading: false
 });
@@ -15,30 +16,31 @@ function homeReducer(state = initialState, action = {}) {
 
     switch (action.type) {
         case constants.LOAD_FEEDS_SUCCESS:
-            return state.set('feeds', fromJS(action.feeds));
+            return state
+                .set('feeds', fromJS(action.feeds))
+                .set('groups', fromJS(action.groups))
+            ;
 
         case constants.LOAD_FEED:
-            groupIndex = state.get('feeds').findIndex(group => group.get('id') === action.group);
-            feedIndex = state.get('feeds').get(groupIndex).get('feeds').findIndex(feed => feed.get('id') === action.id);
-
-            const feed = state.get('feeds').get(groupIndex).get('feeds').get(feedIndex).toJS();
-
+            const feed = state.get('feeds').find(feed => feed.get('id') === action.id).toJS();
             return state.set('currentFeed', fromJS(feed));
 
         case constants.LOAD_FEED_START:
-            groupIndex = state.get('feeds').findIndex(group => group.get('id') === action.group);
-            feedIndex = state.get('feeds').get(groupIndex).get('feeds').findIndex(feed => feed.get('id') === action.id);
-
-            return state.setIn(['feeds', groupIndex, 'feeds', feedIndex, 'loading'], true).set('postsLoading', true);
+            feedIndex = state.get('feeds').findIndex(feed => feed.get('id') === action.id);
+            return state.setIn(['feeds', feedIndex, 'loading'], true).set('postsLoading', true);
 
         case constants.LOAD_FEED_END:
-            groupIndex = state.get('feeds').findIndex(group => group.get('id') === action.group);
-            feedIndex = state.get('feeds').get(groupIndex).get('feeds').findIndex(feed => feed.get('id') === action.id);
-
-            return state.setIn(['feeds', groupIndex, 'feeds', feedIndex, 'loading'], false).set('postsLoading', false);
+            feedIndex = state.get('feeds').findIndex(feed => feed.get('id') === action.id);
+            return state.setIn(['feeds', feedIndex, 'loading'], false).set('postsLoading', false);
 
         case constants.LOAD_FEED_SUCCESS:
-            return state.set('posts', fromJS(action.feed.posts));
+            feedIndex = state.get('feeds').findIndex(feed => feed.get('id') === action.feed.id);
+
+            return state
+                .setIn(['feeds', feedIndex], fromJS(action.feed))
+                .set('currentFeed', fromJS(action.feed))
+                .set('posts', fromJS(action.feed.posts))
+            ;
 
         default:
             return state;

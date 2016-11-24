@@ -2,6 +2,8 @@ export const LOAD_FEEDS = 'LOAD_FEEDS';
 export const LOAD_FEEDS_SUCCESS = 'LOAD_FEEDS_SUCCESS';
 export const LOAD_FEEDS_FAILURE = 'LOAD_FEEDS_FAILURE';
 
+export const SELECT_FEED = 'SELECT_FEED';
+
 export const LOAD_FEED = 'LOAD_FEED';
 export const LOAD_FEED_START = 'LOAD_FEED_START';
 export const LOAD_FEED_SUCCESS = 'LOAD_FEED_SUCCESS';

@@ -1,8 +1,4 @@
-/**
- * Gets the repositories of the user from Github
- */
-
-import { takeLatest } from 'redux-saga';
+import { takeLatest, takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 
 import * as constants from './constants.js';
@@ -21,7 +17,7 @@ function* fetchFeeds(action) {
             throw new Error(result.error);
         }
 
-        yield put({ type: constants.LOAD_FEEDS_SUCCESS, feeds: result });
+        yield put({ type: constants.LOAD_FEEDS_SUCCESS, ...result });
     } catch (e) {
         console.log('fetchFeeds ERROR', e);
         yield put({ type: constants.LOAD_FEEDS_FAILURE, error: e });
@@ -36,7 +32,7 @@ function* fetchFeedsSaga() {
 
 function* fetchFeed(action) {
     try {
-        yield put(actions.fetchFeedStart(action.id, action.group));
+        yield put(actions.fetchFeedStart(action.id));
 
         const result = yield call(api.fetchFeed, action.id);
 
@@ -49,7 +45,7 @@ function* fetchFeed(action) {
         console.log('fetchFeed ERROR', e);
         yield put(actions.fetchFeedError(e));
     } finally {
-        yield put(actions.fetchFeedEnd(action.id, action.group));
+        yield put(actions.fetchFeedEnd(action.id));
     }
 }
 
@@ -57,27 +53,29 @@ function* fetchFeedSaga() {
     yield * takeLatest(constants.LOAD_FEED, fetchFeed);
 }
 
-//function* updateFeed(action) {
-//    try {
-//        //yield put(actions.fetchFeedStart(action.id, action.group));
-//        //
-//        //const result = yield call(api.updateFeed, action.id);
-//        //
-//        //if (result.error) {
-//        //    throw new Error(result.error);
-//        //}
-//        //
-//        //yield put(actions.fetchFeedSuccess(result));
-//    } catch (e) {
-//        console.log('updateFeed ERROR', e);
-//        yield put(actions.updateFeedError(e));
-//    } finally {
-//        yield put(actions.fetchFeedEnd(action.id, action.group));
-//    }
-//}
-//
-//function* updateFeedSaga() {
-//    yield * takeEvery(constants.UPDATE_FEED, updateFeed);
-//}
+function* updateFeed(action) {
+    try {
+        yield put(actions.fetchFeedStart(action.id));
 
-export default [fetchFeedsSaga, fetchFeedSaga/*, updateFeedSaga*/];
+        const result = yield call(api.updateFeed, action.id);
+
+        console.log(result);
+
+        if (result.error) {
+            throw new Error(result.error);
+        }
+
+        yield put(actions.fetchFeedSuccess(result));
+    } catch (e) {
+        console.log('updateFeed ERROR', e);
+        yield put(actions.updateFeedError(e));
+    } finally {
+        yield put(actions.fetchFeedEnd(action.id));
+    }
+}
+
+function* updateFeedSaga() {
+    yield * takeEvery(constants.UPDATE_FEED, updateFeed);
+}
+
+export default [fetchFeedsSaga, fetchFeedSaga, updateFeedSaga];

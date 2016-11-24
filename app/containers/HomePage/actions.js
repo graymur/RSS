@@ -4,26 +4,24 @@ export const fetchFeeds = () => ({
     type: constants.LOAD_FEEDS
 });
 
-export const fetchFeed = ({ id, group }) => {
+export const fetchFeed = id => {
     return {
-    type: constants.LOAD_FEED,
-    id,
-    group
-}};
+        type: constants.LOAD_FEED,
+        id
+    }
+};
 
-export const fetchFeedStart = (id, group) => ({
+export const fetchFeedStart = id => ({
     type: constants.LOAD_FEED_START,
-    id,
-    group
+    id
 });
 
-export const fetchFeedEnd = (id, group) => ({
+export const fetchFeedEnd = id => ({
     type: constants.LOAD_FEED_END,
-    id,
-    group
+    id
 });
 
-export const fetchFeedSuccess = (feed) => ({
+export const fetchFeedSuccess = feed => ({
     type: constants.LOAD_FEED_SUCCESS,
     feed
 });
@@ -33,12 +31,12 @@ export const fetchFeedError = error => ({
     error
 });
 
-export const updateFeed = error => ({
+export const updateFeed = id => ({
     type: constants.UPDATE_FEED,
-    error
+    id
 });
 
-export const updateFeedSuccess = (feed) => ({
+export const updateFeedSuccess = feed => ({
     type: constants.UPDATE_FEED_SUCCESS,
     feed
 });

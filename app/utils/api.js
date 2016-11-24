@@ -20,5 +20,6 @@ export default {
     checkFeed: url => makeRequest('check', { url }),
     saveFeed: data => makeRequest('save', data, { method: 'PUT' }),
     fetchFeeds: () => makeRequest('feeds'),
-    fetchFeed: id => makeRequest('feed', { id })
+    fetchFeed: id => makeRequest('feed', { id }),
+    updateFeed: id => makeRequest('update', { id })
 };

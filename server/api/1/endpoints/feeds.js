@@ -9,17 +9,20 @@ module.exports = function(req, res) {
         const groups = yield GroupModel.find({ user: req.user._id });
         const feeds = yield FeedModel.find({ user: req.user._id });
 
-        const retval = [];
+        //const retval = [];
 
-        for (var i = 0; i < groups.length; i++) {
-            const group = toCleanObject(groups[i]);
-            group.feeds = feeds.filter(feed => {
-                return String(feed.group) == String(groups[i]._id);
-            }).map(toCleanObject(['realTitle', 'modified']));
+        //for (var i = 0; i < groups.length; i++) {
+        //    const group = toCleanObject(groups[i]);
+        //    group.feeds = feeds.filter(feed => {
+        //        return String(feed.group) == String(groups[i]._id);
+        //    }).map(toCleanObject(['realTitle', 'modified']));
+        //
+        //    retval.push(group);
+        //}
 
-            retval.push(group);
-        }
-
-        return res.send(retval);
+        return res.send({
+            groups: groups.map(toCleanObject),
+            feeds: feeds.map(toCleanObject)
+        });
     })());
 };

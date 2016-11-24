@@ -7,7 +7,7 @@ import UpdateMessage from './UpdateMessage.js';
 
 import styles from './feed.sass';
 
-class Feed extends React.Component {
+export class Feed extends React.Component {
     render() {
         const { loading, onUpdateFeed, currentFeed, posts } = this.props;
 
@@ -16,7 +16,7 @@ class Feed extends React.Component {
         return (
             <div className={styles.feed}>
                 { loading ? <Centered><Loader size={100} /></Centered> : null }
-                { showUpdateInfo ?  <UpdateMessage /> : null }
+                { showUpdateInfo ?  <UpdateMessage onUpdateFeed={() => onUpdateFeed(currentFeed.id, currentFeed.group)} /> : null }
             </div>
         );
     }
