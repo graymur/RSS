@@ -30,7 +30,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
         return (
             <div className={styles.content}>
                 <Feeds feeds={feedsByGroups} />
-                <Feed loading={postsLoading} currentFeed={currentFeed} onUpdateFeed={updateFeed} posts={posts} />
+                <Feed />
                 <Post />
             </div>
         );

@@ -79,7 +79,8 @@ module.exports = (options) => ({
                     require('css-mqpacker')()
                 ]
             }
-        })
+        }),
+        new webpack.ContextReplacementPlugin(/\.\/locale$/, 'empty-module', false, /js$/)
     ]),
     resolve: {
         modules: ['app', 'node_modules'],

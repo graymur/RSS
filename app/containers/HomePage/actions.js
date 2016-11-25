@@ -4,6 +4,28 @@ export const fetchFeeds = () => ({
     type: constants.LOAD_FEEDS
 });
 
+export const selectFeed = id => {
+    return {
+        type: constants.SELECT_FEED,
+        id
+    }
+};
+
+export const selectPost = id => {
+    return {
+        type: constants.SELECT_POST,
+        id
+    }
+};
+
+export const markRead = id => {
+    return {
+        type: constants.MARK_READ,
+        id
+    }
+};
+
+
 export const fetchFeed = id => {
     return {
         type: constants.LOAD_FEED,

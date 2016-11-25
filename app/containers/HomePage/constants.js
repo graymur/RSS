@@ -16,3 +16,7 @@ export const UPDATE_FEED_START = 'UPDATE_START';
 export const UPDATE_FEED_SUCCESS = 'UPDATE_SUCCESS';
 export const UPDATE_FEED_FAILURE = 'UPDATE_FAILURE';
 export const UPDATE_FEED_END = 'UPDATE_END';
+
+
+export const SELECT_POST = 'SELECT_POST';
+export const MARK_READ = 'MARK_READ';

@@ -59,8 +59,6 @@ function* updateFeed(action) {
 
         const result = yield call(api.updateFeed, action.id);
 
-        console.log(result);
-
         if (result.error) {
             throw new Error(result.error);
         }

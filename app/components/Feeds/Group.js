@@ -8,8 +8,8 @@ class Group extends React.Component {
     render() {
         const { title, feeds } = this.props;
         return (
-            <div className={styles.feeds__group}>
-                <h5 className={styles.feeds__group__title}>{title}</h5>
+            <div className={styles.group}>
+                <h5 className={styles.title}>{title}</h5>
                 {feeds.map((feed, index) => <Item key={index} {...feed} />)}
             </div>
         );

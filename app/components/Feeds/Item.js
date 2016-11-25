@@ -12,8 +12,6 @@ class Item extends React.Component {
     render() {
         const { id, title, group, fetchFeed, loading, posts, currentFeed } = this.props;
 
-        console.log(posts);
-
         return (
             <div className={styles.feeds__group__item} onClick={() => fetchFeed(id)}>
                 { currentFeed.id === id ? <b>{title}</b> : title }

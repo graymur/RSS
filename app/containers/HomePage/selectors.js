@@ -31,13 +31,29 @@ export const selectPostsLoading = () => createSelector(
 );
 
 export const selectPosts = () => createSelector(
-    selectHome(),
-    homeState => homeState.get('posts').toJS()
+    selectCurrentFeed(),
+    currentFeed => currentFeed.posts
 );
 
 export const selectCurrentFeed = () => createSelector(
     selectHome(),
     homeState => homeState.get('currentFeed').toJS()
+);
+
+export const selectCurrentPostId = () => createSelector(
+    selectHome(),
+    homeState => homeState.get('currentPostId')
+);
+
+export const selectCurrentPost = () => createSelector(
+    [selectCurrentFeed(), selectCurrentPostId()],
+    (currentFeed, currentPostId) => {
+        if (!currentPostId) return false;
+        if (!currentFeed.id) return false;
+
+        const found = currentFeed.posts.filter(post => post.id === currentPostId);
+        return found.length ? found[0] : false;
+    }
 );
 
 export const selectFeed = id => createSelector(

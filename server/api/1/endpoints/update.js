@@ -25,7 +25,9 @@ module.exports = function(req, res) {
 
             const parsed = yield promise;
 
-            parsed.feed.entries.forEach(function (post) {
+            for (let i = 0; i < parsed.feed.entries.length; i++) {
+                let post = parsed.feed.entries[i];
+
                 post = new PostModel({
                     title: post.title,
                     link: post.link,
@@ -37,13 +39,13 @@ module.exports = function(req, res) {
                     user: req.user._id
                 });
 
-                post.save().catch(e => {
-                    //console.log(e);
+                yield post.save().catch(e => {
+                    // do not let one mistake spoil the party
                 });
-            });
+            }
 
             feed.lastUpdate = Date.now();
-            feed.save();
+            yield feed.save();
 
             let posts = yield PostModel.find({
                 user: req.user._id,
