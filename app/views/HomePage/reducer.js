@@ -13,7 +13,7 @@ const initialState = fromJS({
 });
 
 function homeReducer(state = initialState, action = {}) {
-    let groupIndex, feedIndex, postIndex;
+    let feedIndex, postIndex;
 
     switch (action.type) {
         case constants.LOAD_FEEDS_SUCCESS:

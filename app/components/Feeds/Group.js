@@ -5,6 +5,11 @@ import Item from './Item.js';
 import styles from './feeds.sass';
 
 class Group extends React.Component {
+    static propTypes = {
+        title: React.PropTypes.string.isRequired,
+        feeds: React.PropTypes.array.isRequired
+    };
+
     render() {
         const { title, feeds } = this.props;
         return (

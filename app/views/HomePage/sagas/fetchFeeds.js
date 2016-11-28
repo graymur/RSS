@@ -1,9 +1,9 @@
-import { takeLatest, takeEvery } from 'redux-saga';
+import { takeLatest } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 
 import * as constants from '../constants.js';
-import * as appConstants from 'containers/App/constants.js';
-import * as actions from '../actions.js';
+import * as appConstants from 'views/App/constants.js';
+//import * as actions from '../actions.js';
 
 import api from 'utils/api.js';
 

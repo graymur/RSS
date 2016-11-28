@@ -8,7 +8,7 @@ export const selectFeed = id => {
     return {
         type: constants.SELECT_FEED,
         id
-    }
+    };
 };
 
 export const selectPost = id => ({
@@ -18,12 +18,15 @@ export const selectPost = id => ({
 
 export const markRead = (id, feedId) => ({
     type: constants.MARK_READ,
-    id, feedId
+    id,
+    feedId
 });
 
 export const markReadError = (id, feedId, error) => ({
     type: constants.MARK_READ_FAILURE,
-    id, feedId, error
+    id,
+    feedId,
+    error
 });
 
 export const fetchFeed = id => ({
@@ -65,5 +68,3 @@ export const updateFeedError = error => ({
     type: constants.UPDATE_FEED_FAILURE,
     error
 });
-
-

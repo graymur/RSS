@@ -7,6 +7,10 @@ import Group from './Group.js';
 import styles from './feeds.sass';
 
 export class Feeds extends React.Component {
+    static propTypes = {
+        feeds: React.PropTypes.array.isRequired
+    };
+
     render() {
         return (
             <div className={styles.feeds}>
@@ -19,5 +23,3 @@ export class Feeds extends React.Component {
 }
 
 export default Feeds;
-
-

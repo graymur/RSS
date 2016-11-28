@@ -22,9 +22,9 @@ export default function createRoutes(store) {
             name: 'home',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    System.import('containers/HomePage/reducer'),
-                    System.import('containers/HomePage/sagas'),
-                    System.import('containers/HomePage/HomePage')
+                    System.import('views/HomePage/reducer'),
+                    System.import('views/HomePage/sagas'),
+                    System.import('views/HomePage/HomePage')
                 ]);
 
                 const renderRoute = loadModule(cb);
@@ -43,9 +43,9 @@ export default function createRoutes(store) {
             name: 'form',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    System.import('containers/FormPage/reducer'),
-                    System.import('containers/FormPage/sagas'),
-                    System.import('containers/FormPage/FormPage')
+                    System.import('views/FormPage/reducer'),
+                    System.import('views/FormPage/sagas'),
+                    System.import('views/FormPage/FormPage')
                 ]);
 
                 const renderRoute = loadModule(cb);
@@ -59,7 +59,7 @@ export default function createRoutes(store) {
 
                 importModules.catch(errorLoading);
 
-                //System.import('containers/FormPage/FormPage')
+                //System.import('views/FormPage/FormPage')
                 //    .then(loadModule(cb))
                 //    .catch(errorLoading);
             }
@@ -67,7 +67,7 @@ export default function createRoutes(store) {
             path: '*',
             name: 'notfound',
             getComponent(nextState, cb) {
-                System.import('containers/NotFoundPage')
+                System.import('views/NotFoundPage')
                     .then(loadModule(cb))
                     .catch(errorLoading);
             }

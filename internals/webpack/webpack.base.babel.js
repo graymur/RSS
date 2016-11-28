@@ -18,6 +18,10 @@ module.exports = (options) => ({
             exclude: /node_modules/,
             query: options.babelQuery
         }, {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'eslint-loader'
+        }, {
             // Do not transform vendor's CSS with CSS-modules
             // The point is that they remain in global scope.
             // Since we require these CSS files in our JS or CSS files,

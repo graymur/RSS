@@ -3,6 +3,10 @@ import React from 'react';
 import styles from './loader.sass';
 
 export class Loader extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    static propTypes = {
+        size: React.PropTypes.number
+    };
+
     render() {
         let size = this.props.size || 50;
         let borderWidth = Math.max(2, Math.ceil(size * 0.2));
@@ -15,7 +19,7 @@ export class Loader extends React.PureComponent { // eslint-disable-line react/p
         };
 
         return (
-            <div className={styles.loader} style={style}></div>
+            <div className={styles.loader} style={style} />
         );
     }
 }

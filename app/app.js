@@ -59,13 +59,13 @@ const store = configureStore(initialState, browserHistory);
 // Sync history and store, as the react-router-redux reducer
 // is under the non-default key ("routing"), selectLocationState
 // must be provided for resolving how to retrieve the "route" in the state
-import { selectLocationState } from 'containers/App/selectors';
+import { selectLocationState } from 'views/App/selectors';
 const history = syncHistoryWithStore(browserHistory, store, {
     selectLocationState: selectLocationState()
 });
 
 // Set up the router, wrapping all Routes in the App component
-import App from 'containers/App';
+import App from 'views/App';
 import createRoutes from './routes';
 const rootRoute = {
     component: App,
@@ -76,12 +76,12 @@ const render = (messages) => {
     ReactDOM.render(
         <Provider store={store}>
             <Router history={history} routes={rootRoute}
-                    render={
-                        // Scroll to top when going to a new page, imitating default browser
-                        // behaviour
-                        applyRouterMiddleware(useScroll())
-                    }
-                />
+                render={
+                    // Scroll to top when going to a new page, imitating default browser
+                    // behaviour
+                    applyRouterMiddleware(useScroll())
+                }
+            />
         </Provider>,
         document.getElementById('app')
     );

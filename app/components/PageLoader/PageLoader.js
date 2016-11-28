@@ -15,7 +15,7 @@ export class PageLoader extends React.Component { // eslint-disable-line react/p
     render() {
         return (
             <div className={styles['page-loader']}>
-                <Loader size={100}/>
+                <Loader size={100} />
             </div>
         );
     }

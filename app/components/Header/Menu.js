@@ -7,8 +7,8 @@ class Menu extends React.PureComponent {
     render() {
         return (
             <nav className={styles.menu}>
-                <Link to="/form" className={styles.menu__item + ' btn btn-default'} role="button">Add new feed</Link>
-                <a href="#" className={styles.menu__item + ' btn btn-default'} role="button">Logout</a>
+                <Link to='/form' className={styles.menu__item + ' btn btn-default'} role='button'>Add new feed</Link>
+                <a href='#' className={styles.menu__item + ' btn btn-default'} role='button'>Logout</a>
             </nav>
         );
     }

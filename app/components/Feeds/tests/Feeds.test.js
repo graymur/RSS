@@ -7,12 +7,12 @@ import styles from '../feeds.sass';
 
 describe('<Feeds />', () => {
     it('should render an <div> tag', () => {
-        const renderedComponent = shallow(<Feeds />);
+        const renderedComponent = shallow(<Feeds feeds={[]} />);
         expect(renderedComponent.type()).toEqual('div');
     });
 
     it('should have a className attribute', () => {
-        const renderedComponent = shallow(<Feeds />);
+        const renderedComponent = shallow(<Feeds feeds={[]} />);
         expect(renderedComponent.prop('className')).toEqual(styles.feeds);
     });
 });

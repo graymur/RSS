@@ -14,18 +14,24 @@ import { fetchFeeds, updateFeed } from './actions.js';
 import styles from './home.sass';
 
 export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+    static propTypes = {
+        feedsByGroups: React.PropTypes.array.isRequired,
+        feeds: React.PropTypes.array.isRequired,
+        fetchFeeds: React.PropTypes.func.isRequired
+    };
+
+    componentWillMount() {
+        this.fetchFeeds();
+    }
+
     fetchFeeds() {
         if (!this.props.feeds.length) {
             this.props.fetchFeeds();
         }
     }
 
-    componentWillMount() {
-        this.fetchFeeds();
-    }
-
     render() {
-        const { feedsByGroups, currentFeed, updateFeed, postsLoading, posts } = this.props;
+        const { feedsByGroups } = this.props;
 
         return (
             <div className={styles.content}>

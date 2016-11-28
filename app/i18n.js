@@ -5,7 +5,7 @@
  *
  */
 import { addLocaleData } from 'react-intl';
-import { DEFAULT_LOCALE } from '../app/containers/App/constants';
+import { DEFAULT_LOCALE } from '../app/views/App/constants';
 
 import enLocaleData from 'react-intl/locale-data/en';
 import deLocaleData from 'react-intl/locale-data/de';
