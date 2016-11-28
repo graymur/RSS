@@ -31,7 +31,8 @@ import configureStore from './store';
 // Import CSS reset and Global Styles
 import '../node_modules/bootstrap-css-only/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.css';
-import 'sanitize.css/sanitize.css';
+//import 'sanitize.css/sanitize.css';
+import './style/vendor/_gemini-scrollbar.scss';
 import './global.sass';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in

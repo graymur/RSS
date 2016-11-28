@@ -26,7 +26,16 @@ module.exports = (options) => ({
             test: /\.css$/,
             loaders: ['style', 'css', 'postcss']
         }, {
-            test: /\.(scss|sass)$/,
+            test: /\.(scss)$/,
+            loaders: [
+                'style',
+                'css',
+                'postcss',
+                //'resolve-url',
+                'sass-loader'
+            ]
+        }, {
+            test: /\.(sass)$/,
             loaders: [
                 'style',
                 'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',

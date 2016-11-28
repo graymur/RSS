@@ -1,4 +1,6 @@
 import React from 'react';
+import GeminiScrollbar from 'react-gemini-scrollbar';
+
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -24,9 +26,12 @@ export class Feed extends React.Component {
             <div className={styles.feed}>
                 { loading ? <Centered><Loader size={100} /></Centered> : null }
                 { showUpdateInfo ?  <UpdateMessage onUpdateFeed={() => updateFeed(feed.id)} /> : null }
+
+                <GeminiScrollbar>
                 { posts ? posts.map((post, index) => (
                     <Post key={index} {...post} onSelect={() => selectPost(post.id)} isCurrent={post.id === currentPostId} />
                 )) : null }
+                </GeminiScrollbar>
             </div>
         );
     }
