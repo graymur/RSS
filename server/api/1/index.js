@@ -22,6 +22,7 @@ router.get('/check', require('./endpoints/check.js'));
 router.get('/fetch', require('./endpoints/fetch.js'));
 router.get('/update', require('./endpoints/update.js'));
 router.put('/save', require('./endpoints/save.js'));
+router.post('/mark-read', require('./endpoints/mark-read.js'));
 
 router.get('/about', function(req, res) {
     res.send('About birds');

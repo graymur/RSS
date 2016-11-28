@@ -10,11 +10,17 @@ import styles from './feeds.sass';
 
 class Item extends React.Component {
     render() {
-        const { id, title, group, fetchFeed, loading, posts, currentFeed } = this.props;
+        const { id, title, count, unread, fetchFeed, loading, currentFeedId } = this.props;
+
+        const className = [styles.feeds__group__item__title];
+
+        if (currentFeedId === id) {
+            className.push(styles.current);
+        }
 
         return (
             <div className={styles.feeds__group__item} onClick={() => fetchFeed(id)}>
-                { currentFeed.id === id ? <b>{title}</b> : title }
+                <div className={className.join(' ')}>{title} ({count}/{unread})</div>
                 { loading ? <Loader size={12}/> : null }
             </div>
         );
@@ -22,7 +28,7 @@ class Item extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-    currentFeed: selectors.selectCurrentFeed()
+    currentFeedId: selectors.selectCurrentFeedId()
 });
 
 export default connect(mapStateToProps, {

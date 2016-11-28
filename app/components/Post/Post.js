@@ -13,10 +13,10 @@ import styles from './post.sass';
 class Post extends React.Component {
     componentWillReceiveProps(newProps) {
         clearTimeout(this.readTimeout);
-        if (newProps.post && !newProps.post.read) {
-            console.log(newProps.post.id);
+        if (newProps.post && !newProps.post.read && !newProps.post.readFailure) {
             this.readTimeout = setTimeout(() => {
-                console.log('marked read ' + newProps.post.id);
+                console.log(newProps.post);
+                newProps.markRead(newProps.post.id, newProps.post.feed);
             }, 2000);
         }
     }
@@ -41,4 +41,6 @@ const mapStateToProps = createStructuredSelector({
     loading: selectors.selectPostsLoading()
 });
 
-export default connect(mapStateToProps, {})(Post);
+export default connect(mapStateToProps, {
+    markRead
+})(Post);

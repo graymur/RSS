@@ -17,10 +17,10 @@ import styles from './feed.sass';
 
 export class Feed extends React.Component {
     render() {
-        const { loading, updateFeed, feed, selectPost, currentPostId } = this.props;
-        const posts = feed.posts;
+        const { loading, updateFeed, feed, posts, selectPost, currentPostId } = this.props;
+        //const posts = feed && feed.posts || [];
 
-        const showUpdateInfo = Boolean(!loading && feed.id && !posts.length);
+        const showUpdateInfo = Boolean(!loading && feed && !posts.length);
 
         return (
             <div className={styles.feed}>
@@ -39,6 +39,7 @@ export class Feed extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
     feed: selectors.selectCurrentFeed(),
+    posts: selectors.selectPosts(),
     loading: selectors.selectPostsLoading(),
     currentPostId: selectors.selectCurrentPostId()
 });

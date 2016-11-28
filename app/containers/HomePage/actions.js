@@ -11,27 +11,25 @@ export const selectFeed = id => {
     }
 };
 
-export const selectPost = id => {
-    return {
-        type: constants.SELECT_POST,
-        id
-    }
-};
+export const selectPost = id => ({
+    type: constants.SELECT_POST,
+    id
+});
 
-export const markRead = id => {
-    return {
-        type: constants.MARK_READ,
-        id
-    }
-};
+export const markRead = (id, feedId) => ({
+    type: constants.MARK_READ,
+    id, feedId
+});
 
+export const markReadError = (id, feedId, error) => ({
+    type: constants.MARK_READ_FAILURE,
+    id, feedId, error
+});
 
-export const fetchFeed = id => {
-    return {
-        type: constants.LOAD_FEED,
-        id
-    }
-};
+export const fetchFeed = id => ({
+    type: constants.LOAD_FEED,
+    id
+});
 
 export const fetchFeedStart = id => ({
     type: constants.LOAD_FEED_START,

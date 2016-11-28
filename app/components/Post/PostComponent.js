@@ -10,8 +10,8 @@ class PostComponent extends React.Component {
         return (
             <GeminiScrollbar>
                 <div className={styles.post__wr}>
-                        <a href={link} target="_blank"><h2>{title}</h2></a>
-                        <div className={styles.post__content} dangerouslySetInnerHTML={{ __html: content }}></div>
+                    <a href={link} target="_blank"><h2>{title}</h2></a>
+                    <div className={styles.post__content} dangerouslySetInnerHTML={{ __html: content }}></div>
                 </div>
             </GeminiScrollbar>
         );

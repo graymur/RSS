@@ -32,12 +32,20 @@ export const selectPostsLoading = () => createSelector(
 
 export const selectPosts = () => createSelector(
     selectCurrentFeed(),
-    currentFeed => currentFeed.posts
+    currentFeed => currentFeed && currentFeed.posts || []
+);
+
+export const selectCurrentFeedId = () => createSelector(
+    selectHome(),
+    homeState => homeState.get('currentFeedId')
 );
 
 export const selectCurrentFeed = () => createSelector(
-    selectHome(),
-    homeState => homeState.get('currentFeed').toJS()
+    [selectFeeds(), selectCurrentFeedId()],
+    (feeds, currentFeedId) => {
+        const found = feeds.filter(feed => feed.id === currentFeedId);
+        return found ? found[0] : false;
+    }
 );
 
 export const selectCurrentPostId = () => createSelector(

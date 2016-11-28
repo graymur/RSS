@@ -21,5 +21,6 @@ export default {
     saveFeed: data => makeRequest('save', data, { method: 'PUT' }),
     fetchFeeds: () => makeRequest('feeds'),
     fetchFeed: id => makeRequest('feed', { id }),
-    updateFeed: id => makeRequest('update', { id })
+    updateFeed: id => makeRequest('update', { id }),
+    markRead: (id, feedId) => makeRequest('mark-read', { id, feedId }, { method: 'POST' })
 };

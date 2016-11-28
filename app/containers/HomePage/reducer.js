@@ -7,12 +7,13 @@ const initialState = fromJS({
     feeds: [],
     posts: [],
     currentFeed: {},
+    currentFeedId: false,
     currentPostId: false,
     postsLoading: false
 });
 
 function homeReducer(state = initialState, action = {}) {
-    let groupIndex, feedIndex;
+    let groupIndex, feedIndex, postIndex;
 
     switch (action.type) {
         case constants.LOAD_FEEDS_SUCCESS:
@@ -23,8 +24,6 @@ function homeReducer(state = initialState, action = {}) {
 
         case constants.LOAD_FEED:
             return state.set('currentPost', false);
-            //const feed = state.get('feeds').find(feed => feed.get('id') === action.id).toJS();
-            //feedIndex = state.get('feeds').findIndex(feed => feed.get('id') === action.id);
 
         case constants.LOAD_FEED_START:
             feedIndex = state.get('feeds').findIndex(feed => feed.get('id') === action.id);
@@ -39,12 +38,32 @@ function homeReducer(state = initialState, action = {}) {
 
             return state
                 .setIn(['feeds', feedIndex], fromJS(action.feed))
-                .set('currentFeed', fromJS(action.feed))
+                .set('currentFeedId', action.feed.id)
                 .set('posts', fromJS(action.feed.posts))
             ;
 
         case constants.SELECT_POST:
             return state.set('currentPostId', action.id);
+
+        case constants.MARK_READ:
+            feedIndex = state.get('feeds').findIndex(feed => feed.get('id') === action.feedId);
+            postIndex = state.get('feeds').get(feedIndex).get('posts').findIndex(post => post.get('id') === action.id);
+
+            return state
+                .setIn(['feeds', feedIndex, 'unread'], state.get('feeds').get(feedIndex).get('unread') - 1)
+                .setIn(['feeds', feedIndex, 'posts', postIndex, 'read'], true)
+                .setIn(['feeds', feedIndex, 'posts', postIndex, 'readFailure'], false)
+            ;
+
+        case constants.MARK_READ_FAILURE:
+            console.log(action);
+            feedIndex = state.get('feeds').findIndex(feed => feed.get('id') === action.feedId);
+            postIndex = state.get('feeds').get(feedIndex).get('posts').findIndex(post => post.get('id') === action.id);
+
+            return state
+                .setIn(['feeds', feedIndex, 'posts', postIndex, 'read'], false)
+                .setIn(['feeds', feedIndex, 'posts', postIndex, 'readFailure'], true)
+            ;
 
         default:
             return state;

@@ -14,6 +14,7 @@ var Feed = new Schema({
     url: { type: String, required: true },
     modified: { type: Date, default: Date.now },
     count: { type: Number, default: 0 },
+    unread: { type: Number, default: 0 },
     lastUpdate: { type: Date, default: null }
 });
 
