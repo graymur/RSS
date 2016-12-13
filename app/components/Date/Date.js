@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-export class Date extends React.PureComponent {
+export default class DateComponent extends React.PureComponent {
     static propTypes = {
         source: React.PropTypes.string.isRequired,
         format: React.PropTypes.string.isRequired
@@ -14,5 +14,3 @@ export class Date extends React.PureComponent {
         );
     }
 }
-
-export default Date;

@@ -19,7 +19,10 @@ export class Feed extends React.Component {
     static propTypes = {
         loading: React.PropTypes.bool.isRequired,
         updateFeed: React.PropTypes.func.isRequired,
-        feed: React.PropTypes.object.isRequired,
+        feed: React.PropTypes.oneOfType([
+            React.PropTypes.object,
+            React.PropTypes.bool
+        ]),
         posts: React.PropTypes.array.isRequired,
         selectPost: React.PropTypes.func.isRequired,
         currentPostId: React.PropTypes.string.isRequired

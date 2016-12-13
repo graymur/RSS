@@ -7,8 +7,8 @@ const initialState = fromJS({
     feeds: [],
     posts: [],
     currentFeed: {},
-    currentFeedId: false,
-    currentPostId: false,
+    currentFeedId: '',
+    currentPostId: '',
     postsLoading: false
 });
 
@@ -33,6 +33,14 @@ function homeReducer(state = initialState, action = {}) {
             feedIndex = state.get('feeds').findIndex(feed => feed.get('id') === action.id);
             return state.setIn(['feeds', feedIndex, 'loading'], false).set('postsLoading', false);
 
+        case constants.SELECT_FEED:
+            const activeFeed = state.get('feeds').find(feed => feed.get('id') === action.id);
+
+            return state
+                .set('currentFeedId', activeFeed.get('id'))
+                .set('posts', activeFeed.get('posts'))
+            ;
+
         case constants.LOAD_FEED_SUCCESS:
             feedIndex = state.get('feeds').findIndex(feed => feed.get('id') === action.feed.id);
 
@@ -56,7 +64,6 @@ function homeReducer(state = initialState, action = {}) {
             ;
 
         case constants.MARK_READ_FAILURE:
-            console.log(action);
             feedIndex = state.get('feeds').findIndex(feed => feed.get('id') === action.feedId);
             postIndex = state.get('feeds').get(feedIndex).get('posts').findIndex(post => post.get('id') === action.id);
 

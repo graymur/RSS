@@ -3,7 +3,7 @@ import GeminiScrollbar from 'react-gemini-scrollbar';
 
 import styles from '../post.sass';
 
-class Post extends React.PureComponent {
+export default class Post extends React.PureComponent {
     static propTypes = {
         link: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
@@ -23,5 +23,3 @@ class Post extends React.PureComponent {
         );
     }
 }
-
-export default Post;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Date from 'components/Date/Date.js';
+import DateComponent from 'components/Date/Date.js';
 //import { FormattedMessage } from 'react-intl';
 
 import styles from './feed.sass';
@@ -21,7 +21,7 @@ export class Post extends React.PureComponent {
 
         return (
             <article className={className.join(' ')} onClick={onSelect}>
-                <div className={styles.post__date + ' label label-default'}><Date source={date} format='YYYY-MM-DD HH:mm' /></div>
+                <div className={styles.post__date + ' label label-default'}>{<DateComponent source={date} format='YYYY-MM-DD HH:mm' />}</div>
                 <h5 className={styles.post__title}>{title}</h5>
             </article>
         );

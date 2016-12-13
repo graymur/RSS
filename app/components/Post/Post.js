@@ -12,14 +12,16 @@ import styles from './post.sass';
 
 class Post extends React.Component {
     static propTypes = {
-        post: React.PropTypes.object.isRequired
+        post: React.PropTypes.oneOfType([
+            React.PropTypes.object,
+            React.PropTypes.bool
+        ])
     };
 
     componentWillReceiveProps(newProps) {
         clearTimeout(this.readTimeout);
         if (newProps.post && !newProps.post.read && !newProps.post.readFailure) {
             this.readTimeout = setTimeout(() => {
-                console.log(newProps.post);
                 newProps.markRead(newProps.post.id, newProps.post.feed);
             }, 2000);
         }

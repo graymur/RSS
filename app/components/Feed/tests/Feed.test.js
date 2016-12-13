@@ -2,7 +2,7 @@ import React from 'react';
 import expect from 'expect';
 import { shallow } from 'enzyme';
 
-import Feed from '../Feed.js';
+import { Feed } from '../Feed.js';
 import styles from '../feed.sass';
 
 describe('<Feed />', () => {

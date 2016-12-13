@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './centered.sass';
 
-export class Centered extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class Centered extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     static propTypes = {
         children: React.PropTypes.node
     };
@@ -13,5 +13,3 @@ export class Centered extends React.PureComponent { // eslint-disable-line react
         );
     }
 }
-
-export default Centered;
