@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = require('./webpack.base.babel')({
     // In production, we skip all hot-reloading stuff
@@ -23,7 +24,11 @@ module.exports = require('./webpack.base.babel')({
             minChunks: 2,
             async: true
         }),
-
+        new ExtractTextPlugin({
+            filename: '[name].[chunkhash].js',
+            disable: false,
+            allChunks: true
+        }),
         // Merge all duplicate modules
         new webpack.optimize.DedupePlugin(),
 

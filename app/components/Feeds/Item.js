@@ -30,8 +30,8 @@ class Item extends React.PureComponent {
 
         return (
             <div className={styles.feeds__group__item} onClick={() => selectFeed(id)}>
-                <div className={className.join(' ')}>{title} ({count}/{unread})</div>
-                { loading ? <Loader size={12} /> : null }
+                <span className={className.join(' ')}>{title} ({count}/{unread})</span>
+                { loading ? <Loader size={12} className={styles.loader} /> : null }
             </div>
         );
     }
@@ -41,7 +41,4 @@ const mapStateToProps = createStructuredSelector({
     currentFeedId: selectors.selectCurrentFeedId()
 });
 
-export default connect(mapStateToProps, {
-    //fetchFeed,
-    selectFeed
-})(Item);
+export default connect(mapStateToProps, { selectFeed })(Item);

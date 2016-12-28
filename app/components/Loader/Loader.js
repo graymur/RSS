@@ -2,10 +2,32 @@ import React from 'react';
 
 import styles from './loader.sass';
 
-export class Loader extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class Loader extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     static propTypes = {
-        size: React.PropTypes.number
+        size: React.PropTypes.number,
+        className: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.arrayOf(React.PropTypes.string)
+        ])
     };
+
+    defaultProps = {
+        className: []
+    };
+
+    constructor(props) {
+        super(props);
+
+        let { className } = this.props;
+
+        if (!Array.isArray(className)) {
+            className = [className];
+        }
+
+        className.push(styles.loader);
+
+        this.className = className;
+    }
 
     render() {
         let size = this.props.size || 50;
@@ -19,9 +41,7 @@ export class Loader extends React.PureComponent { // eslint-disable-line react/p
         };
 
         return (
-            <div className={styles.loader} style={style} />
+            <span className={this.className.join(' ')} style={style} />
         );
     }
 }
-
-export default Loader;
