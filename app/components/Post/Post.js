@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import PostComponent from './presentational/Post.js';
+import GeminiScrollbar from 'react-gemini-scrollbar';
 //import { FormattedMessage } from 'react-intl';
 
 import * as selectors from 'views/HomePage/selectors.js';
@@ -36,7 +37,9 @@ class Post extends React.Component {
 
         return (
             <div className={styles.post}>
-                {post ? <PostComponent {...post} /> : null}
+                <GeminiScrollbar>
+                    {post ? <PostComponent {...post} /> : null}
+                </GeminiScrollbar>
             </div>
         );
     }
