@@ -1,0 +1,54 @@
+:global {
+    HTML, BODY {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    *, *:before, *:after {
+        box-sizing: border-box;
+    }
+
+    #app {
+        height: 100%;
+    }
+
+    .container {
+        height: 100%;
+        border: 2px solid #ccc;
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .r {
+        display: table-cell;
+        overflow: hidden;
+        vertical-align: middle;
+        text-align: center;
+        position: relative;
+
+        &._1 {
+            border: 1px solid blue;
+        }
+
+        &._2 {
+            border: 1px solid green;
+        }
+
+        &._3 {
+            border: 1px solid magenta;
+        }
+
+        .handler {
+            position: absolute;
+            width: 10px;
+            height: 100%;
+            top: 0;
+            right: 0;
+            background: #ccc;
+            cursor: ew-resize;
+        }
+    }
+}
