@@ -8,7 +8,7 @@ module.exports = function(req, res) {
     return run((function * () {
         try {
             let feed = yield FeedModel.findOne({user: req.user._id, _id: req.query.id});
-            const posts = yield PostModel.find({feed: feed._id});
+            const posts = yield PostModel.find({feed: feed._id}).sort([['date', 'descending']]);
 
             feed = toCleanObject(['realTitle'])(feed);
             feed.posts = posts.map(toCleanObject);

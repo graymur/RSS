@@ -24,7 +24,8 @@ module.exports = function(req, res) {
             });
 
             const parsed = yield promise;
-            let saved = 0;
+
+            let saved = parsed.feed.entries.length;
 
             for (let i = 0; i < parsed.feed.entries.length; i++) {
                 let post = parsed.feed.entries[i];
@@ -40,11 +41,7 @@ module.exports = function(req, res) {
                     user: req.user._id
                 });
 
-                yield post.save()
-                    .then(() => saved++)
-                    .catch(e => {
-                        // do not let one mistake spoil the party
-                    });
+                yield post.save().catch(e => saved--);
             }
 
             feed.lastUpdate = Date.now();
