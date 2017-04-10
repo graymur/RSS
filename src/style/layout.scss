@@ -1,0 +1,71 @@
+@import "~style/variables.scss";
+@import "~style/lib/mixins.scss";
+
+*, :before, :after {
+	box-sizing: border-box;
+}
+
+HTML {
+	font-size: 62.5%;
+}
+
+HTML, BODY {
+	margin: 0;
+	padding: 0;
+	@include wh100;
+}
+
+BODY {
+	font: 1.5rem/1.42857143 $baseFont;
+	color: $baseFontColor;
+	background: #fafafa;
+}
+
+#react-root {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.main {
+	flex: auto 1 1;
+	display: flex;
+	flex-direction: column;
+
+	.header {
+		flex: 0 0 auto;
+	}
+
+	.content {
+		flex: 1 0 auto;
+		display: flex;
+		overflow-x: hidden;
+		position: relative;
+
+		.left-panel {
+			flex: 0 0 $asideWidth;
+			background: white;
+		}
+
+		.workplace {
+			flex: 1 0 50%;
+		}
+
+		.right-panel {
+			position: absolute;
+			top: 0;
+			right: -$asideWidth;
+			@include wh($asideWidth, 100%);
+			transition: right $transitionSpeed;
+			background: white;
+
+			&._active {
+				right: 0;
+			}
+		}
+	}
+
+	.footer {
+		flex: 0 0 auto;
+	}
+}

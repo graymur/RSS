@@ -1,0 +1,13 @@
+@import "../../global.scss";
+
+.form
+    @extend %padded;
+
+.error {
+	color: red;
+	margin-top: 2rem;
+}
+
+.button {
+	margin-right: 2rem;
+}
