@@ -11,8 +11,6 @@ baseWebpackConfig.entry = [
 	'react-hot-loader/patch',
 	'webpack-hot-middleware/client',
 	'webpack/hot/dev-server',
-	// `webpack-dev-server/client?http://${config.host}:${config.devPort}`,
-	// 'webpack/hot/only-dev-server',
 	baseWebpackConfig.entry.app
 ]
 

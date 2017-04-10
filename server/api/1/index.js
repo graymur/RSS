@@ -1,5 +1,3 @@
-const runGenerator = require('./util/runGenerator.js');
-
 const express = require('express');
 const router = express.Router();
 

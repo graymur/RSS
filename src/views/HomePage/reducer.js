@@ -1,4 +1,6 @@
 import * as constants from './constants.js';
+import find from 'lodash/find';
+import findIndex from 'lodash/findIndex';
 
 const initialState = {
     groups: [],
@@ -11,7 +13,7 @@ const initialState = {
 };
 
 function homeReducer(state = initialState, action = {}) {
-    // let feedIndex, postIndex;
+    let feedIndex, postIndex, feeds;
 
     switch (action.type) {
 		case constants.LOAD_FEEDS_SUCCESS:
@@ -20,38 +22,29 @@ function homeReducer(state = initialState, action = {}) {
         case constants.LOAD_FEED:
 			return { ...state, currentPost: false };
 
-        case constants.LOAD_FEED_START:
-			return state;
-            // feedIndex = state.get('feeds').findIndex(feed => feed.get('id') === action.id);
-            // return state.setIn(['feeds', feedIndex, 'loading'], true).set('postsLoading', true);
+		case constants.SELECT_FEED:
+			const activeFeed = find(state.feeds, { id: action.id });
+			return { ...state, currentFeedId: activeFeed.id, posts: activeFeed.posts };
+
+		case constants.LOAD_FEED_START:
+			feedIndex = findIndex(state.feeds, { id: action.id });
+			feeds = state.feeds.slice();
+			feeds[feedIndex].loading = true;
+
+			return { ...state, feeds, postsLoading: true };
 
         case constants.LOAD_FEED_END:
 			return state;
-            // feedIndex = state.get('feeds').findIndex(feed => feed.get('id') === action.id);
-            // return state.setIn(['feeds', feedIndex, 'loading'], false).set('postsLoading', false);
-
-        case constants.SELECT_FEED:
-			return state;
-            // const activeFeed = state.get('feeds').find(feed => feed.get('id') === action.id);
-			//
-            // return state
-            //     .set('currentFeedId', activeFeed.get('id'))
-            //     .set('posts', activeFeed.get('posts'))
-            // ;
 
         case constants.LOAD_FEED_SUCCESS:
-			return state;
-            // feedIndex = state.get('feeds').findIndex(feed => feed.get('id') === action.feed.id);
-			//
-            // return state
-            //     .setIn(['feeds', feedIndex], fromJS(action.feed))
-            //     .set('currentFeedId', action.feed.id)
-            //     .set('posts', fromJS(action.feed.posts))
-            // ;
+			feedIndex = findIndex(state.feeds, { id: action.feed.id });
+			feeds = state.feeds.slice();
+			feeds[feedIndex] = action.feed;
+
+			return { ...state, feeds, postsLoading: false, currentFeedId: action.feed.id, posts: action.feed.posts };
 
 		case constants.SELECT_POST:
 			return { ...state, currentPostId: action.id };
-            // return state.set('currentPostId', action.id);
 
         case constants.MARK_READ:
 			return state;

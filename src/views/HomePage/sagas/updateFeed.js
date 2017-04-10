@@ -25,5 +25,5 @@ export function * updateFeed(action) {
 }
 
 export default function * updateFeedSaga() {
-    yield * takeEvery(constants.UPDATE_FEED, updateFeed);
+    yield takeEvery(constants.UPDATE_FEED, updateFeed);
 }

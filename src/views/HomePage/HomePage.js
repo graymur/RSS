@@ -13,7 +13,7 @@ import * as selectors from './selectors.js';
 
 import { fetchFeeds, updateFeed } from './actions.js';
 
-import styles from './home.scss';
+import './home.scss';
 
 export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
     static propTypes = {
@@ -60,14 +60,14 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
         const { feedsByGroups } = this.props;
 
         return (
-            <div className={styles.content}>
-                <Resizeable className={styles.block} width={this.state.widths[0]} onDrag={this.dragHandlers[0]}>
+            <div className='content'>
+                <Resizeable className='block' width={this.state.widths[0]} onDrag={this.dragHandlers[0]}>
                     <Feeds feeds={feedsByGroups} width={this.state.widths[0]} />
                 </Resizeable>
-                <Resizeable className={styles.block} width={this.state.widths[1]} onDrag={this.dragHandlers[1]}>
+                <Resizeable className='block' width={this.state.widths[1]} onDrag={this.dragHandlers[1]}>
                     <Feed width={this.state.widths[1]} />
                 </Resizeable>
-                <div className={styles.block}>
+                <div className='block'>
                     <Post width={this.state.widths[0] + this.state.widths[1]} />
                 </div>
             </div>

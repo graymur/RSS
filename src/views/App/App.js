@@ -9,7 +9,7 @@ import PageLoader from 'components/PageLoader/PageLoader';
 
 import * as selectors from './selectors.js';
 
-import styles from './app.scss';
+import './app.scss';
 
 export class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
     static propTypes = {
@@ -21,7 +21,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
         const { loading, children } = this.props;
 
         return (
-            <div className={styles.main}>
+            <div className='main'>
                 <Helmet titleTemplate='%s' defaultTitle='RSS' meta={[{ name: 'description', content: 'RSS reader build with React.js' }]} />
                 <Header />
                 {React.Children.toArray(children)}

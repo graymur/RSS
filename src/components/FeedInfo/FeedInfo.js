@@ -28,10 +28,8 @@ export class FeedInfo extends React.Component {
 
         if (!feed) return null;
 
-        console.log(feed);
-
         return (
-            <div className='feeds'>
+            <div className='feed-info'>
                 <input value={feed.url} className='url form-control' readOnly={Boolean(true)} />
                 <a href='#' onClick={() => updateFeed(feed.id)} className='item btn btn-default' role='button'>Update feed</a>
                 <a href='#' className='item btn btn-default' role='button'>Edit feed</a>

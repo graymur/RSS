@@ -29,20 +29,24 @@ export class Feed extends React.Component {
         currentPostId: PropTypes.string.isRequired
     };
 
+	handleUpdateClick = e => {
+		this.props.updateFeed(this.props.feed.id)
+	}
+
     render() {
         const { loading, updateFeed, feed, posts, selectPost, currentPostId } = this.props;
         const showUpdateInfo = Boolean(!loading && feed && !posts.length);
 
         return (
-            <div className={styles.feed}>
+            <div className='feed'>
                 { loading ? <Centered><Loader size={100} /></Centered> : null }
-                { showUpdateInfo ? <UpdateMessage onUpdateFeed={() => updateFeed(feed.id)} /> : null }
+                { showUpdateInfo ? <UpdateMessage onUpdateFeed={this.handleUpdateClick} /> : null }
 
-                <GeminiScrollbar>
+				{/*<GeminiScrollbar>*/}
                 { posts ? posts.map((post, index) => (
                     <Post key={index} {...post} onSelect={() => selectPost(post.id)} isCurrent={post.id === currentPostId} />
                 )) : null }
-                </GeminiScrollbar>
+				{/*</GeminiScrollbar>*/}
             </div>
         );
     }

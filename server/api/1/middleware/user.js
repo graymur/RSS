@@ -1,15 +1,15 @@
+const co = require('co');
 const UserModel = require('../models/user.js').model;
-const run = require('../util/runGenerator.js');
 
 module.exports = (req, res, next) => {
-    return run((function * () {
-        const user = yield UserModel.findOne({ outerId: 1 });
+	return co(function * () {
+		const user = yield UserModel.findOne({outerId: 1});
 
-        if (!user) {
+		if (!user) {
 
-        }
+		}
 
-        req.user = user;
-        return next();
-    })());
+		req.user = user;
+		return next();
+	});
 };

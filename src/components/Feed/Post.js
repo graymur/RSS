@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DateComponent from 'components/Date/Date.js';
 //import { FormattedMessage } from 'react-intl';
 
-import styles from './feed.scss';
+import './feed.scss';
 
 export class Post extends React.PureComponent {
     static propTypes = {
@@ -16,14 +16,14 @@ export class Post extends React.PureComponent {
 
     render() {
         const { read, title, date, onSelect, isCurrent } = this.props;
-        let className = [styles.post];
-        if (!read) className.push(styles.unread);
-        if (isCurrent) className.push(styles.current);
+        let className = ['feed__item'];
+        if (!read) className.push('_unread');
+        if (isCurrent) className.push('_current');
 
         return (
             <article className={className.join(' ')} onClick={onSelect}>
-                <div className={styles.post__date + ' label label-default'}>{<DateComponent source={date} format='YYYY-MM-DD HH:mm' />}</div>
-                <h5 className={styles.post__title}>{title}</h5>
+                <div className='post__date label label-default'>{<DateComponent source={date} format='YYYY-MM-DD HH:mm' />}</div>
+                <h5 className='post__title'>{title}</h5>
             </article>
         );
     }

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './loader.scss';
+import './loader.scss';
 
-export default class Loader extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class Loader extends React.PureComponent {
     static propTypes = {
         size: PropTypes.number,
         className: PropTypes.oneOfType([
@@ -25,7 +25,7 @@ export default class Loader extends React.PureComponent { // eslint-disable-line
             className = [className];
         }
 
-        className.push(styles.loader);
+        className.push('loader');
 
         this.className = className;
     }

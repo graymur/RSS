@@ -7,7 +7,7 @@ import Loader from 'components/Loader/Loader';
 import * as selectors from 'views/HomePage/selectors.js';
 import { selectFeed } from 'views/HomePage/actions.js';
 
-import styles from './feeds.scss';
+import './feeds.scss';
 
 class Item extends React.PureComponent {
     static propTypes = {
@@ -20,19 +20,23 @@ class Item extends React.PureComponent {
         loading: PropTypes.bool
     };
 
-    render() {
-        const { id, title, count, unread, selectFeed, loading, currentFeedId } = this.props;
+	handleClick = e => {
+		this.props.selectFeed(this.props.id);
+	}
 
-        const className = [styles.feeds__group__item__title];
+    render() {
+        const { id, title, count, unread, loading, currentFeedId } = this.props;
+
+        const className = ['feeds__group__item__title'];
 
         if (currentFeedId === id) {
-            className.push(styles.current);
+            className.push('_current');
         }
 
         return (
-            <div className={styles.feeds__group__item} onClick={() => selectFeed(id)}>
+            <div className='feeds__group__item' onClick={this.handleClick}>
                 <span className={className.join(' ')}>{title} ({count}/{unread})</span>
-                { loading ? <Loader size={12} className={styles.loader} /> : null }
+                { loading ? <Loader size={12} className='loader' /> : null }
             </div>
         );
     }

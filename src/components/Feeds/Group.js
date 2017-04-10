@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 //import { FormattedMessage } from 'react-intl';
 import Item from './Item.js';
 
-import styles from './feeds.scss';
+import './feeds.scss';
 
 class Group extends React.Component {
     static propTypes = {
@@ -14,8 +14,8 @@ class Group extends React.Component {
     render() {
         const { title, feeds } = this.props;
         return (
-            <div className={styles.group}>
-                <h5 className={styles.title}>{title}</h5>
+            <div className='feeds__group'>
+                <h5 className='feeds__group__title'>{title}</h5>
                 {feeds.map((feed, index) => <Item key={index} {...feed} />)}
             </div>
         );

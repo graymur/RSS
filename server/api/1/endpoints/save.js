@@ -1,11 +1,9 @@
-const run = require('../util/runGenerator.js');
+const co = require('co');
 const GroupModel = require('../models/group.js').model;
 const FeedModel = require('../models/feed.js').model;
 
-var dv = function (v) { console.log(JSON.stringify(v, null, 4)); };
-
 module.exports = function(req, res) {
-    return run((function * () {
+    return co(function * () {
         try {
             const user = req.user;
             const group = yield GroupModel.findOne({user: user._id, title: 'Unsorted'});
@@ -32,5 +30,5 @@ module.exports = function(req, res) {
 
             return res.send(response);
         }
-    })());
+    });
 };

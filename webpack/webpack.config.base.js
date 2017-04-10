@@ -17,11 +17,11 @@ export default {
 		publicPath: '/'
 	},
 	plugins: [
-		// new webpack.DllReferencePlugin({
-		// 	context: config.sourceDir,
-		// 	manifest: require(path.join(config.dllDir,
-		// 		`vendors-${process.env.NODE_ENV === 'development' ? 'development' : 'production'}-manifest.json`))
-		// }),
+		new webpack.DllReferencePlugin({
+			context: config.sourceDir,
+			manifest: require(path.join(config.dllDir,
+				`vendors-${process.env.NODE_ENV === 'development' ? 'development' : 'production'}-manifest.json`))
+		}),
 		new webpack.DefinePlugin({
 			'process.env': {
 				NODE_ENV: JSON.stringify(process.env.NODE_ENV)

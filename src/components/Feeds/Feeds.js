@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import GeminiScrollbar from 'react-gemini-scrollbar';
 
-//import { FormattedMessage } from 'react-intl';
 import Group from './Group.js';
 
-import styles from './feeds.scss';
+import './feeds.scss';
 
 export class Feeds extends React.Component {
     static propTypes = {
@@ -14,10 +13,10 @@ export class Feeds extends React.Component {
 
     render() {
         return (
-            <div className={styles.feeds}>
-                <GeminiScrollbar>
+            <div className='feeds'>
+				{/*<GeminiScrollbar>*/}
                     {this.props.feeds.map((group, index) => <Group key={index} {...group} />)}
-                </GeminiScrollbar>
+				{/*</GeminiScrollbar>*/}
             </div>
         );
     }

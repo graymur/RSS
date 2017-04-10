@@ -11,23 +11,24 @@
 			font-size: 1.4rem;
 			font-weight: bold;
 			margin-bottom: 1rem;
+		}
 
-			&__item {
-				margin-bottom: 10px;
-				cursor: pointer;
+		&__item {
+			margin-bottom: 10px;
+			cursor: pointer;
 
-				&__title {
-					display: inline-block;
+			&__title {
+				display: inline-block;
+
+				&._current {
+					font-weight: bold;
 				}
 			}
 		}
 	}
+
+	.loader {
+		margin-left: 0.5rem;
+	}
 }
 
-.loader {
-	margin-left: 0.5rem;
-}
-
-.current {
-	font-weight: bold;
-}

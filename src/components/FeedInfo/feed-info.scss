@@ -1,12 +1,13 @@
-.feeds {
+.feed-info {
 	display: flex;
+
+	.url {
+		width: 30rem;
+		margin-right: 1.5rem;
+	}
+
+	.item {
+		margin-right: 1.5rem;
+	}
 }
 
-.url {
-	width: 30rem;
-	margin-right: 1.5rem;
-}
-
-.item {
-	margin-right: 1.5rem;
-}

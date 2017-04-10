@@ -38,9 +38,9 @@ class Post extends React.Component {
 
         return (
             <div className={styles.post}>
-                <GeminiScrollbar>
+				{/*<GeminiScrollbar>*/}
                     {post ? <PostComponent {...post} /> : null}
-                </GeminiScrollbar>
+				{/*</GeminiScrollbar>*/}
             </div>
         );
     }

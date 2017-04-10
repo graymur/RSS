@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './resizeable.scss';
+import './resizeable.scss';
 
 export default class Resizeable extends React.Component { // eslint-disable-line react/prefer-stateless-function
     static propTypes = {
@@ -51,7 +51,7 @@ export default class Resizeable extends React.Component { // eslint-disable-line
         return (
             <div className={className} ref='element' style={style}>
                 {children}
-                <div className={styles.handler} ref='handler' onMouseDown={this.handleMouseDown} onMouseUp={this.stopDrag} />
+                <div className='handler' ref='handler' onMouseDown={this.handleMouseDown} onMouseUp={this.stopDrag} />
             </div>
         );
     }

@@ -6,6 +6,7 @@
 	display: flex;
 	align-items: center;
 	@extend %padded;
+	border-bottom: 1px solid #ececec;
 }
 
 .menu {
