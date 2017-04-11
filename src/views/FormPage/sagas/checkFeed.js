@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-import * as constants from '../constants.js';
+import * as actions from '../actions';
 
 import api from 'utils/api.js';
 
@@ -8,20 +8,19 @@ import api from 'utils/api.js';
  * Check feed
  */
 export function * checkFeed(action) {
-	console.log('yes');
 	try {
-		const data = yield call(api.checkFeed, action.url);
+		const data = yield call(api.checkFeed, action.payload);
 
 		if (data.error) {
 			throw new Error(data.error);
 		}
 
-		yield put({ type: constants.CHECK_FEED_SUCCESS, data });
+		yield put(actions.checkFeedSuccess(data));
 	} catch (e) {
-		yield put({ type: constants.CHECK_FEED_FAILURE, error: e });
+		yield put(actions.checkFeedFailure(e));
 	}
 }
 
 export default function * checkFeedSaga() {
-	yield takeEvery(constants.CHECK_FEED, checkFeed);
+	yield takeEvery(actions.checkFeed.toString(), checkFeed);
 }

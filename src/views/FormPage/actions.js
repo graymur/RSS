@@ -1,35 +1,9 @@
-import * as constants from './constants.js';
+import { createAction } from 'redux-actions'
 
-export const checkFeed = url => ({
-    type: constants.CHECK_FEED,
-    url
-});
-
-export const checkFeedSuccess = data => ({
-    type: constants.CHECK_FEED_SUCCESS,
-    data
-});
-
-export const checkFeedFailure = error => ({
-    type: constants.CHECK_FEED_FAILURE,
-    error
-});
-
-export const resetFeed = () => ({
-    type: constants.RESET_FEED
-});
-
-export const saveFeed = feed => ({
-    type: constants.SAVE_FEED,
-    feed
-});
-
-export const saveFeedSuccess = data => ({
-    type: constants.SAVE_FEED_SUCCESS,
-    data
-});
-
-export const saveFeedFailure = error => ({
-    type: constants.SAVE_FEED_FAILURE,
-    error
-});
+export const checkFeed = createAction('checkFeed', url => url)
+export const checkFeedSuccess = createAction('checkFeedSuccess', data => data)
+export const checkFeedFailure = createAction('checkFeedFailure', error => error)
+export const resetFeed = createAction('resetFeed', () => {})
+export const saveFeed = createAction('saveFeed', feed => feed)
+export const saveFeedSuccess = createAction('saveFeedSuccess', data => data)
+export const saveFeedFailure = createAction('saveFeedFailure', error => error)

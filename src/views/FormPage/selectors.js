@@ -1,7 +1,3 @@
-/**
- * Homepage selectors
- */
-
 import { createSelector } from 'reselect';
 
 export const selectForm = () => state => state.form;

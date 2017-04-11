@@ -1,6 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-import * as constants from '../constants.js';
+// import * as constants from '../constants.js';
+import * as actions from '../actions';
 
 import api from 'utils/api.js';
 
@@ -10,18 +11,18 @@ import api from 'utils/api.js';
  */
 export function * saveFeed(action) {
 	try {
-		const data = yield call(api.saveFeed, action.feed);
+		const data = yield call(api.saveFeed, action.payload);
 
 		if (data.error) {
 			throw new Error(data.error);
 		}
 
-		yield put({ type: constants.SAVE_FEED_SUCCESS, data });
+		yield put(actions.saveFeedSuccess(data));
 	} catch (e) {
-		yield put({ type: constants.SAVE_FEED_FAILURE, error: e });
+		yield put(actions.saveFeedFailure(e));
 	}
 }
 
 export default function * saveFeedSaga() {
-	yield takeEvery(constants.SAVE_FEED, saveFeed);
+	yield takeEvery(actions.saveFeed.toString(), saveFeed);
 }
