@@ -4,29 +4,29 @@
 
 import { createSelector } from 'reselect';
 
-export const selectForm = () => state => state.get('form');
+export const selectForm = () => state => state.form;
 
 export const selectError = () => createSelector(
     selectForm(),
-    formState => formState.get('error')
+    formState => formState.error
 );
 
 export const selectLoading = () => createSelector(
     selectForm(),
-    formState => formState.get('loading')
+    formState => formState.loading
 );
 
 export const selectSaved = () => createSelector(
     selectForm(),
-    formState => formState.get('saved')
+    formState => formState.saved
 );
 
 export const selectData = () => createSelector(
     selectForm(),
-    formState => formState.get('data')
+    formState => formState.data
 );
 
 export const selectValid = () => createSelector(
     selectForm(),
-    formState => formState.get('valid')
+    formState => formState.valid
 );

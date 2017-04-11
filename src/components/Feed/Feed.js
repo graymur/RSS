@@ -1,20 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import GeminiScrollbar from 'react-gemini-scrollbar';
+// import GeminiScrollbar from 'react-gemini-scrollbar';
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import * as selectors from 'views/HomePage/selectors.js';
 import { updateFeed, selectPost } from 'views/HomePage/actions.js';
-//import { FormattedMessage } from 'react-intl';
 
 import Centered from 'components/Centered/Centered.js';
 import Loader from 'components/Loader/Loader.js';
 import UpdateMessage from './UpdateMessage.js';
 import Post from './Post.js';
 
-import styles from './feed.scss';
+import './feed.scss';
 
 export class Feed extends React.Component {
     static propTypes = {
@@ -34,7 +33,7 @@ export class Feed extends React.Component {
 	}
 
     render() {
-        const { loading, updateFeed, feed, posts, selectPost, currentPostId } = this.props;
+        const { loading, feed, posts, selectPost, currentPostId } = this.props;
         const showUpdateInfo = Boolean(!loading && feed && !posts.length);
 
         return (

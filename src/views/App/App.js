@@ -11,7 +11,7 @@ import * as selectors from './selectors.js';
 
 import './app.scss';
 
-export class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class App extends React.Component {
     static propTypes = {
         children: PropTypes.node,
         loading: PropTypes.bool

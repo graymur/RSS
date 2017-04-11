@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import GeminiScrollbar from 'react-gemini-scrollbar';
+// import GeminiScrollbar from 'react-gemini-scrollbar';
 
 import Group from './Group.js';
 

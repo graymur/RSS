@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import PostComponent from './presentational/Post.js';
-import GeminiScrollbar from 'react-gemini-scrollbar';
+// import GeminiScrollbar from 'react-gemini-scrollbar';
 //import { FormattedMessage } from 'react-intl';
 
 import * as selectors from 'views/HomePage/selectors.js';

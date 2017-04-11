@@ -1,24 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-//import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-//import messages from './messages';
-import autoBind from 'react-autobind';
-//import parser from 'rss-parser';
-import * as selectors from './selectors.js';
-import Loader from 'components/Loader/Loader.js';
+import * as selectors from './selectors';
+import Loader from 'components/Loader/Loader';
 import ErrorElement from './ErrorElement.js';
+import { checkFeed, resetFeed, saveFeed } from './actions';
 
-import { checkFeed, resetFeed, saveFeed } from './actions.js';
+import './form.scss';
 
-import styles from './form.scss';
-
-export class FormPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class FormPage extends React.Component {
     constructor(props) {
         super(props);
-        autoBind(this);
 
         this.state = {
             feedUrl: '',
@@ -32,16 +25,16 @@ export class FormPage extends React.Component { // eslint-disable-line react/pre
         }
     }
 
-    handleUrlChange(event) {
+    handleUrlChange = event => {
         this.setState({ feedUrl: event.target.value });
         this.props.resetFeed();
     }
 
-    handleTitleChange(event) {
+    handleTitleChange = event => {
         this.setState({ feedTitle: event.target.value });
     }
 
-    handleSubmit(event) {
+    handleSubmit = event => {
         event.preventDefault();
 
         this.props.saveFeed({
@@ -51,8 +44,8 @@ export class FormPage extends React.Component { // eslint-disable-line react/pre
         });
     }
 
-    checkFeed(e) {
-        e.preventDefault();
+    checkFeed = event => {
+		event.preventDefault();
         const url = this.state.feedUrl;
         this.props.checkFeed(url);
     }
@@ -68,14 +61,14 @@ export class FormPage extends React.Component { // eslint-disable-line react/pre
         const hideStyle = { display: data && data.title ? 'none' : 'block' };
 
         return (
-            <div className={styles.form}>
+            <div className='form'>
                 <form onSubmit={this.handleSubmit}>
                     <div className='form-group'>
                         <label htmlFor='feedUrl'>Feed URL</label>
                         <input type='url' className='form-control' id='feedUrl' name='feedUrl' placeholder='Feed URL' value={this.state.feedUrl} onChange={this.handleUrlChange} />
                     </div>
                     <div className='form-group' style={hideStyle}>
-                        <button className={styles['button'] + ' btn btn-default'} onClick={this.checkFeed} disabled={loading || !this.state.feedUrl.length}>Check feed</button>
+                        <button className='button btn btn-default' onClick={this.checkFeed} disabled={loading || !this.state.feedUrl.length}>Check feed</button>
                         {loading ? <Loader size={34} /> : null}
                     </div>
                     <div className='form-group' style={showStyle}>
@@ -83,7 +76,7 @@ export class FormPage extends React.Component { // eslint-disable-line react/pre
                         <input type='text' className='form-control' id='feedTitle' name='feedTitle' placeholder='Feed title' value={this.state.feedTitle} onChange={this.handleTitleChange} />
                     </div>
                     <div className='form-group' style={showStyle}>
-                        <button className={styles['button'] + ' btn btn-default'} type='submit' disabled={error || saved || loading || !this.valid()}>Save feed</button>
+                        <button className='button btn btn-default' type='submit' disabled={error || saved || loading || !this.valid()}>Save feed</button>
                         {loading ? <Loader size={34} /> : null}
                     </div>
                     {error ? <ErrorElement error={error} /> : null}
@@ -99,7 +92,7 @@ FormPage.propTypes = {
     resetFeed: PropTypes.func,
     saveFeed: PropTypes.func,
     loading: PropTypes.bool,
-    valid: PropTypes.bool,
+    // valid: PropTypes.bool,
     saved: PropTypes.bool,
     error: PropTypes.oneOfType([
         PropTypes.object,
@@ -113,7 +106,7 @@ FormPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
     loading: selectors.selectLoading(),
-    valid: selectors.selectLoading(),
+    // valid: selectors.selectLoading(),
     error: selectors.selectError(),
     data: selectors.selectData(),
     saved: selectors.selectSaved()
