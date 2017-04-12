@@ -1,9 +1,4 @@
-import * as constants from './constants.js';
+import { createAction } from 'redux-actions';
 
-export const loadingStart = () => ({
-    type: constants.LOADING_START
-});
-
-export const loadingEnd = () => ({
-    type: constants.LOADING_END
-});
+export const loadingStart = createAction('App.loadingStart', () => {})
+export const loadingEnd = createAction('App.loadingEnd', () => {})

@@ -1,13 +1,13 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import * as constants from '../constants.js';
-import * as appConstants from 'views/App/constants.js';
+import * as constants from '../constants';
+import * as appAction from 'views/App/actions';
 
-import api from 'utils/api.js';
+import api from 'utils/api';
 
 export function * fetchFeeds(action) {
     try {
-        yield put({ type: appConstants.LOADING_START });
+        yield put(appAction.loadingStart());
 
         const result = yield call(api.fetchFeeds);
 
@@ -20,7 +20,7 @@ export function * fetchFeeds(action) {
         console.log('fetchFeeds ERROR', e);
         yield put({ type: constants.LOAD_FEEDS_FAILURE, error: e });
     } finally {
-        yield put({ type: appConstants.LOADING_END });
+        yield put(appAction.loadingEnd());
     }
 }
 

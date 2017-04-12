@@ -1,20 +1,11 @@
-import * as constants from './constants.js';
+import * as actions from './actions';
+import { handleActions } from 'redux-actions';
 
 export const initialState = {
     loading: false
 };
 
-function appReducer(state = initialState, action = {}) {
-    switch (action.type) {
-		case constants.LOADING_START:
-			return { ...state, loading: true };
-
-        case constants.LOADING_END:
-			return { ...state, loading: false };
-
-        default:
-            return state;
-    }
-}
-
-export default appReducer;
+export default handleActions({
+	[actions.loadingStart]: (state) => ({ ...state, loading: true }),
+	[actions.loadingEnd]: (state) => ({ ...state, loading: false })
+}, initialState);

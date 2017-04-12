@@ -10,26 +10,14 @@ export const initialState = {
 };
 
 export default handleActions({
-	[actions.checkFeed]: (state) => {
-		return { ...state, loading: true, error: false };
-	},
+	[actions.checkFeed]: (state) => ({ ...state, loading: true, error: false }),
 	[actions.checkFeedSuccess]: (state, action) => {
 		action.payload.realTitle = action.payload.title;
 		return { ...state, loading: false, error: false, valid: true, data: action.payload };
 	},
-	[actions.checkFeedFailure]: (state, action) => {
-		return { ...state, loading: false, error: action.payload, valid: false, data: {} };
-	},
-	[actions.resetFeed]: () => {
-		return initialState;
-	},
-	[actions.saveFeed]: (state) => {
-		return { ...state, loading: true };
-	},
-	[actions.saveFeedSuccess]: (state) => {
-		return { ...state, loading: false, saved: true };
-	},
-	[actions.saveFeedFailure]: (state, action) => {
-		return { ...state, loading: false, error: action.payload, saved: false };
-	}
+	[actions.checkFeedFailure]: (state, action) => ({ ...state, loading: false, error: action.payload, valid: false, data: {} }),
+	[actions.resetFeed]: () => initialState,
+	[actions.saveFeed]: (state) => ({ ...state, loading: true }),
+	[actions.saveFeedSuccess]: (state) => ({ ...state, loading: false, saved: true }),
+	[actions.saveFeedFailure]: (state, action) => ({ ...state, loading: false, error: action.payload, saved: false })
 }, initialState);
