@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from '../post.scss';
+import '../post.scss';
 
 export default class Post extends React.PureComponent {
     static propTypes = {
@@ -14,9 +14,9 @@ export default class Post extends React.PureComponent {
         const { link, title, content } = this.props;
 
         return (
-                <div className={styles.post__wr}>
+                <div className='post'>
                     <a href={link} target='_blank'><h2>{title}</h2></a>
-                    <div className={styles.post__content} dangerouslySetInnerHTML={{ __html: content }} />
+                    <div className='post__content' dangerouslySetInnerHTML={{ __html: content }} />
                 </div>
         );
     }

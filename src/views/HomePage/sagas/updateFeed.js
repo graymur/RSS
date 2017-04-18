@@ -1,15 +1,14 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-import * as constants from '../constants.js';
 import * as actions from '../actions.js';
 
-import api from 'utils/api.js';
+import api from 'utils/api';
 
-export function * updateFeed(action) {
+export function * updateFeed({ payload: id }) {
     try {
-        yield put(actions.fetchFeedStart(action.id));
+        yield put(actions.fetchFeedStart(id));
 
-        const result = yield call(api.updateFeed, action.id);
+        const result = yield call(api.updateFeed, id);
 
         if (result.error) {
             throw new Error(result.error);
@@ -20,10 +19,10 @@ export function * updateFeed(action) {
         console.log('updateFeed ERROR', e);
         yield put(actions.updateFeedError(e));
     } finally {
-        yield put(actions.fetchFeedEnd(action.id));
+        yield put(actions.fetchFeedEnd(id));
     }
 }
 
 export default function * updateFeedSaga() {
-    yield takeEvery(constants.UPDATE_FEED, updateFeed);
+    yield takeEvery(actions.updateFeed.toString(), updateFeed);
 }

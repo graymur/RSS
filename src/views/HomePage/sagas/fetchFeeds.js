@@ -1,13 +1,13 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import * as constants from '../constants';
-import * as appAction from 'views/App/actions';
+import { loadingStart, loadingEnd } from 'views/App/actions';
+import * as actions from '../actions.js';
 
 import api from 'utils/api';
 
 export function * fetchFeeds(action) {
     try {
-        yield put(appAction.loadingStart());
+        yield put(loadingStart());
 
         const result = yield call(api.fetchFeeds);
 
@@ -15,15 +15,15 @@ export function * fetchFeeds(action) {
             throw new Error(result.error);
         }
 
-        yield put({ type: constants.LOAD_FEEDS_SUCCESS, ...result });
+        yield put(actions.fetchFeedsSuccess(result.feeds, result.groups));
     } catch (e) {
         console.log('fetchFeeds ERROR', e);
-        yield put({ type: constants.LOAD_FEEDS_FAILURE, error: e });
+		yield put(actions.fetchFeedsError(e));
     } finally {
-        yield put(appAction.loadingEnd());
+        yield put(loadingEnd());
     }
 }
 
 export default function * fetchFeedsSaga() {
-    yield takeLatest(constants.LOAD_FEEDS, fetchFeeds);
+    yield takeLatest(actions.fetchFeeds.toString(), fetchFeeds);
 }

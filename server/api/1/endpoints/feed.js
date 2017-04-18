@@ -1,23 +1,17 @@
-const co = require('co');
-const FeedModel = require('../models/feed.js').model;
-const PostModel = require('../models/post.js').model;
-const toCleanObject = require('../util/cleanUpObjects').toCleanObject;
-const dv = require('../util/dv.js');
+import { FeedModel } from '../models/feed';
+import { PostModel } from '../models/post';
+import { toCleanObject } from '../util/cleanUpObjects';
 
-module.exports = function(req, res) {
-    return co(function * () {
-        try {
-            let feed = yield FeedModel.findOne({user: req.user._id, _id: req.query.id});
-            const posts = yield PostModel.find({feed: feed._id}).sort([['date', 'descending']]);
+export default async function feed(req, res) {
+	try {
+		let feed = await FeedModel.findOne({user: req.user._id, _id: req.query.id});
+		const posts = await PostModel.find({feed: feed._id}).sort([['date', 'descending']]);
 
-            feed = toCleanObject(['realTitle'])(feed);
-            feed.posts = posts.map(toCleanObject);
+		feed = toCleanObject(['realTitle'])(feed);
+		feed.posts = posts.map(toCleanObject);
 
-            //setTimeout(() => {
-            return res.send(feed);
-            //}, 5000000);
-        } catch (e) {
-            return res.send({error: e.toString()});
-        }
-    });
-};
+		return res.send(feed);
+	} catch (e) {
+		return res.send({error: e.toString()});
+	}
+}

@@ -9,19 +9,19 @@ import { updateFeed } from 'views/HomePage/actions.js';
 
 import './feed-info.scss';
 
-export class FeedInfo extends React.Component {
+export class FeedInfo extends React.PureComponent {
     static propTypes = {
         feed: PropTypes.object,
         updateFeed: PropTypes.func.isRequired
     };
 
-    shouldComponentUpdate(newProps) {
-        if (this.props.feed) {
-            return this.props.feed && this.props.feed.id !== newProps.feed.id;
-        }
-
-        return true;
-    }
+    // shouldComponentUpdate(newProps) {
+    //     if (this.props.feed) {
+    //         return this.props.feed && this.props.feed.id !== newProps.feed.id;
+    //     }
+	//
+    //     return true;
+    // }
 
     render() {
         const { feed, updateFeed } = this.props;

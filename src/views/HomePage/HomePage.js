@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import Resizeable from 'components/Resizeable/Resiziable.js';
-import Feeds from 'components/Feeds/Feeds.js';
-import Feed from 'components/Feed/Feed.js';
-import Post from 'components/Post/Post.js';
+import Resizeable from 'components/Resizeable/Resizeable';
+import Feeds from 'components/Feeds/Feeds';
+import Feed from 'components/Feed/Feed';
+import Post from 'components/Post/Post';
 
 import * as selectors from './selectors.js';
 
@@ -15,7 +15,7 @@ import { fetchFeeds, updateFeed } from './actions.js';
 
 import './home.scss';
 
-export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class HomePage extends React.Component {
     static propTypes = {
         feedsByGroups: PropTypes.array.isRequired,
         feeds: PropTypes.array.isRequired,
@@ -79,8 +79,7 @@ const mapStateToProps = createStructuredSelector({
     feeds: selectors.selectFeeds(),
     feedsByGroups: selectors.selectFeedsByGroups(),
     postsLoading: selectors.selectPostsLoading(),
-    posts: selectors.selectPosts(),
-    currentFeed: selectors.selectCurrentFeed()
+    posts: selectors.selectPosts()
 });
 
 export default connect(mapStateToProps, {

@@ -2,8 +2,8 @@ import React from 'react';
 import expect from 'expect';
 import { shallow } from 'enzyme';
 
-import Resizeable from '../Resiziable.js';
-import styles from '../resizeable.scss';
+import Resizeable from '../Resizeable';
+// import '../resizeable.scss';
 
 describe('<Resizeable />', () => {
     it('should render an <div> tag with correct class and width', () => {

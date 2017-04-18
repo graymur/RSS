@@ -1,0 +1,24 @@
+// const FeedModel = require('../models/feed.js').model;
+// const PostModel = require('../models/post.js').model;
+import { FeedModel } from '../models/feed';
+import { PostModel } from '../models/post';
+
+export default async function makrRead(req, res) {
+	try {
+		let feed = await FeedModel.findOne({user: req.user._id, _id: req.body.feedId});
+		if (!feed) throw new Error('Feed not found');
+
+		let post = await PostModel.findOne({feed: feed._id, _id: req.body.id});
+		if (!post) throw new Error('Post not found');
+
+		post.read = true;
+		await post.save();
+
+		feed.unread--;
+		await feed.save();
+
+		return res.send({ count: feed.count, unread: feed.unread });
+	} catch (e) {
+		return res.send({error: e.toString()});
+	}
+}

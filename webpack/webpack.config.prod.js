@@ -37,8 +37,8 @@ productionConfig.module.loaders.filter(loader =>
 	delete loader.loaders
 })
 
-export default productionConfig
+// export default productionConfig
 
 // uncomment to see bundle analyzer report
-// import addBundleAnalyzerPlugin from './util/add-bundle-analyzer-plugin'
-// export default addBundleAnalyzerPlugin(productionConfig)
+import addBundleAnalyzerPlugin from './util/add-bundle-analyzer-plugin'
+export default addBundleAnalyzerPlugin(productionConfig)

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
+import dateFns from 'date-fns';
 
 export default class DateComponent extends React.PureComponent {
     static propTypes = {
@@ -11,7 +11,7 @@ export default class DateComponent extends React.PureComponent {
     render() {
         const { source, format } = this.props;
         return (
-            <span>{moment(source).format(format)}</span>
+            <span>{dateFns.format(source, format)}</span>
         );
     }
 }
