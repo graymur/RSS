@@ -9,11 +9,10 @@ export default async function makrRead(req, res) {
 		let post = await PostModel.findOne({feed: feed._id, _id: req.body.id});
 		if (!post) throw new Error('Post not found');
 
-		// post.read = true;
-		// await post.save();
-
+		post.read = true;
 		feed.unread--;
-		// await feed.save();
+
+		await new Promise.all([post.save(), feed.save()]);
 
 		return res.send({ count: feed.count, unread: feed.unread });
 	} catch (e) {

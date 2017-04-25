@@ -31,8 +31,8 @@ export const selectPostsLoading = () => createSelector(
 );
 
 export const selectPosts = () => createSelector(
-    selectCurrentFeed(),
-    currentFeed => (currentFeed && currentFeed.posts) || []
+	selectHome(),
+    homeState => (homeState && homeState.posts) || []
 );
 
 export const selectCurrentFeedId = () => createSelector(
