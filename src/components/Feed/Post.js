@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DateComponent from 'components/Date/Date';
-//import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 
 import './feed.scss';
 
-export class Post extends React.PureComponent {
+export class Post extends React.Component {
     static propTypes = {
         read: PropTypes.bool.isRequired,
         title: PropTypes.string.isRequired,
@@ -15,16 +14,14 @@ export class Post extends React.PureComponent {
         isCurrent: PropTypes.bool.isRequired
     };
 
+	shouldComponentUpdate(nextProps) {
+		return this.props.read !== nextProps.read || this.props.isCurrent !== nextProps.isCurrent;
+	}
+
     render() {
         const { read, title, date, onSelect, isCurrent } = this.props;
-		console.log('post render');
-        // let className = ['feed__item'];
-        // if (!read) className.push('_unread');
-        // if (isCurrent) className.push('_current');
 
 		const className = classNames('feed__item', { '_unread': !read, '_current': isCurrent });
-
-		// console.log(read);
 
         return (
             <article className={className} onClick={onSelect}>

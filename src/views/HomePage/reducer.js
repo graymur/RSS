@@ -21,12 +21,12 @@ export default handleActions({
 		return { ...state, currentPost: false };
 	},
 	[actions.selectFeed]: (state, action) => {
-		const activeFeed = find(state.feeds, { id: action.payload });
-		return { ...state, currentFeedId: activeFeed.id, posts: activeFeed.posts };
+		const curentFeed = find(state.feeds, { id: action.payload });
+		return { ...state, currentFeedId: curentFeed.id, posts: curentFeed.posts };
 	},
 	[actions.fetchFeedStart]: (state, action) => {
 		const feedIndex = findIndex(state.feeds, { id: action.payload });
-		const feeds = state.feeds.slice();
+		const feeds = [...state.feeds];
 		feeds[feedIndex].loading = true;
 
 		return { ...state, feeds, postsLoading: true };
@@ -36,7 +36,7 @@ export default handleActions({
 	},
 	[actions.fetchFeedSuccess]: (state, action) => {
 		const feedIndex = findIndex(state.feeds, { id: action.payload.id });
-		const feeds = state.feeds.slice();
+		const feeds = [...state.feeds];
 		feeds[feedIndex] = action.payload;
 
 		return { ...state, feeds, postsLoading: false, currentFeedId: action.payload.id, posts: action.payload.posts };
@@ -45,29 +45,14 @@ export default handleActions({
 		return { ...state, currentPostId: action.payload };
 	},
 	[actions.markRead]: (state, { payload: { feedId, id } }) => {
-		const feeds = state.feeds.slice()
+		const feeds = [...state.feeds];
 		const feedIndex = findIndex(feeds, { id: feedId });
-
 		feeds[feedIndex].posts = [...feeds[feedIndex].posts];
-
 		const postIndex = findIndex(feeds[feedIndex].posts, { id });
-
 		feeds[feedIndex].posts[postIndex].read = true;
-
-		console.log(feeds[feedIndex].unread)
-
 		feeds[feedIndex].unread -= 1;
 
-		console.log(feeds[feedIndex].unread)
-
-		// console.dir(feeds[feedIndex].posts[postIndex]);
-
-		// const feeds = state.feeds.slice();
-		// const feed = find(feeds, { id: feedId });
-		// const posts = feed.posts.slice();
-		// const post = find(posts, { id });
-
-		return { ...state, feeds: feeds };
+		return { ...state, feeds: feeds, posts: feeds[feedIndex].posts };
 	},
 	[actions.markReadError]: (state, action) => {
 		return state;

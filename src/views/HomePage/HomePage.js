@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -77,9 +76,7 @@ export class HomePage extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
     feeds: selectors.selectFeeds(),
-    feedsByGroups: selectors.selectFeedsByGroups(),
-    postsLoading: selectors.selectPostsLoading(),
-    posts: selectors.selectPosts()
+    feedsByGroups: selectors.selectFeedsByGroups()
 });
 
 export default connect(mapStateToProps, {

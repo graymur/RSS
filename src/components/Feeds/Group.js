@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import { FormattedMessage } from 'react-intl';
 import Item from './Item.js';
 
 import './feeds.scss';

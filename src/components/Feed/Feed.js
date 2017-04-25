@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import find from 'lodash/find';
 // import GeminiScrollbar from 'react-gemini-scrollbar';
 
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+// import { createStructuredSelector } from 'reselect';
 
-import * as selectors from 'views/HomePage/selectors.js';
+// import * as selectors from 'views/HomePage/selectors.js';
 import { updateFeed, selectPost } from 'views/HomePage/actions.js';
 
 import Centered from 'components/Centered/Centered.js';
@@ -51,12 +52,15 @@ export class Feed extends React.Component {
     }
 }
 
-const mapStateToProps = createStructuredSelector({
-    feed: selectors.selectCurrentFeed(),
-    posts: selectors.selectPosts(),
-    loading: selectors.selectPostsLoading(),
-    currentPostId: selectors.selectCurrentPostId()
-});
+const mapStateToProps = ({ home }) => {
+	const currentFeed = find(home.feeds, { id: home.currentFeedId });
+	return {
+		feed: currentFeed,
+		posts: home.posts || [],
+		loading: home.postsLoading,
+		currentPostId: home.currentPostId
+	};
+};
 
 export default connect(mapStateToProps, {
     updateFeed,

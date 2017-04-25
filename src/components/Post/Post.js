@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import PostComponent from './presentational/Post.js';
 // import GeminiScrollbar from 'react-gemini-scrollbar';
-//import { FormattedMessage } from 'react-intl';
 
 import * as selectors from 'views/HomePage/selectors.js';
 import { markRead } from 'views/HomePage/actions.js';
@@ -23,9 +22,7 @@ class Post extends React.Component {
     componentWillReceiveProps(newProps) {
         clearTimeout(this.readTimeout);
         if (newProps.post && !newProps.post.read && !newProps.post.readFailure) {
-            this.readTimeout = setTimeout(() => {
-                newProps.markRead(newProps.post.id, newProps.post.feed);
-            }, 2000);
+            this.readTimeout = setTimeout(() => newProps.markRead(newProps.post.id, newProps.post.feed), 2000);
         }
     }
 
