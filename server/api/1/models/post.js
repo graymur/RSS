@@ -1,12 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+const Schema = mongoose.Schema;
 
-const db = require('../db.js');
-
-var Feed = require('./feed.js').schema;
-var User = require('./user.js').schema;
-
-var Post = new Schema({
+export const PostSchema = new Schema({
     user: { ref: 'User', type: mongoose.Schema.ObjectId },
     feed: { ref: 'Feed', type: mongoose.Schema.ObjectId },
     title: { type: String, required: true },
@@ -18,14 +13,9 @@ var Post = new Schema({
     read: { type: Boolean, default: false }
 });
 
-Post.index({
+PostSchema.index({
     feed: 1,
     id: 1
 }, { unique: true });
 
-var PostModel = mongoose.model('Post', Post);
-
-module.exports = {
-    schema: Post,
-    model: PostModel
-};
+export const PostModel = mongoose.model('Post', PostSchema);

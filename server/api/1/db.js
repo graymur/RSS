@@ -1,15 +1,13 @@
-var mongoose = require('mongoose');
+import mongoose from 'mongoose';
 var log = require('./log')(module);
 
 mongoose.connect('mongodb://localhost/node-rss');
-var db = mongoose.connection;
+const db = mongoose.connection;
 
-db.on('error', function (err) {
-    log.error('connection error:', err.message);
+db.on('error', err => {
+	log.error('connection error:', err.message);
 });
 
-db.once('open', function callback () {
-    log.info('Connected to DB!');
-});
+db.once('open', callback => log.info('Connected to DB!'));
 
-module.exports = db;
+export default db;

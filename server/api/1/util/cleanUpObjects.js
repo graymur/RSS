@@ -1,4 +1,4 @@
-function cleanUp(arg) {
+export function cleanUp(arg) {
     if (Array.isArray(arg)) {
         return function(item) {
             arg.forEach(field => {
@@ -16,11 +16,11 @@ function cleanUp(arg) {
     }
 }
 
-function toObject(item) {
+export function toObject(item) {
     return item.toObject();
 }
 
-function toCleanObject(arg) {
+export function toCleanObject(arg) {
     if (Array.isArray(arg)) {
         return function (item) {
             return cleanUp(arg)(toObject(item));
@@ -29,9 +29,3 @@ function toCleanObject(arg) {
         return cleanUp(toObject(arg));
     }
 }
-
-module.exports = {
-    cleanUp,
-    toObject,
-    toCleanObject
-};

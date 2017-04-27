@@ -1,12 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+const Schema = mongoose.Schema;
 
-const db = require('../db.js');
-
-var User = require('./user.js').schema;
-var Group = require('./group.js').schema;
-
-var Feed = new Schema({
+export const FeedSchema = new Schema({
     user: { ref: 'User', type: mongoose.Schema.ObjectId },
     group: { ref: 'Group', type: mongoose.Schema.ObjectId },
     title: { type: String, required: true },
@@ -18,14 +13,9 @@ var Feed = new Schema({
     lastUpdate: { type: Date, default: null }
 });
 
-Feed.index({
+FeedSchema.index({
     user: 1,
     url: 1
 }, { unique: true });
 
-var FeedModel = mongoose.model('Feed', Feed);
-
-module.exports = {
-    schema: Feed,
-    model: FeedModel
-};
+export const FeedModel = mongoose.model('Feed', FeedSchema);

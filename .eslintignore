@@ -1,5 +1,0 @@
-build/*
-internals/*
-coverage/*
-server/*
-**/*.test.js

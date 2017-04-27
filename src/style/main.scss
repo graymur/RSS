@@ -1,0 +1,12 @@
+@import "vendor/gemini-scrollbar";
+
+%padded {
+	padding-left: 2rem;
+	padding-right: 2rem;
+}
+
+BODY {
+	&._loading {
+		overflow: hidden;
+	}
+}

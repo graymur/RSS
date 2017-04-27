@@ -1,0 +1,15 @@
+.content {
+	height: calc(100vh - 6rem);
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	overflow: hidden;
+}
+
+.block {
+	display: table-cell;
+	overflow: hidden;
+	padding-right: 1rem;
+	user-select: none;
+	position: relative;
+}
