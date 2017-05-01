@@ -1,5 +1,5 @@
-import { FeedModel } from '../models/feed';
-import { GroupModel } from '../models/group';
+import { FeedModel } from '../../../models/feed';
+import { GroupModel } from '../../../models/group';
 
 export default async function save(req, res) {
 	try {

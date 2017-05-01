@@ -1,5 +1,5 @@
-import { FeedModel } from '../models/feed';
-import { PostModel } from '../models/post';
+import { FeedModel } from '../../../models/feed';
+import { PostModel } from '../../../models/post';
 
 export default async function makrRead(req, res) {
 	try {

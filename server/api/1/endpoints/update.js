@@ -1,6 +1,6 @@
 import parser from 'rss-parser';
-import { FeedModel } from '../models/feed';
-import { PostModel } from '../models/post';
+import { FeedModel } from '../../../models/feed';
+import { PostModel } from '../../../models/post';
 import { toCleanObject } from '../util/cleanUpObjects';
 
 export default async function (req, res) {

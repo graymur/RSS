@@ -17,7 +17,6 @@ export default {
 		publicPath: '/'
 	},
 	plugins: [
-		new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en)$/),
 		new webpack.DllReferencePlugin({
 			context: config.sourceDir,
 			manifest: require(path.join(config.dllDir,

@@ -7,5 +7,7 @@ export default {
 	dllFileName: 'vendors.js',
 	devPort: 3000,
 	prodPort: 8080,
-	host: 'localhost'
+	host: 'localhost',
+	googleClientId: '...',
+	googleClientSecret: '...'
 }

@@ -1,5 +1,5 @@
-import { FeedModel } from '../models/feed';
-import { GroupModel } from '../models/group';
+import { FeedModel } from '../../../models/feed';
+import { GroupModel } from '../../../models/group';
 import { toCleanObject } from '../util/cleanUpObjects';
 
 export default async function feeds(req, res) {
