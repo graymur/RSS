@@ -10,6 +10,7 @@ export function * fetchFeeds(action) {
         yield put(loadingStart());
 
         const result = yield call(api.fetchFeeds);
+		console.log(result);
 
         if (result.error) {
             throw new Error(result.error);

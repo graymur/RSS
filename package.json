@@ -64,6 +64,7 @@
     "classnames": "^2.2.5",
     "date-fns": "^1.28.3",
     "express": "^4.15.2",
+    "express-session": "^1.15.2",
     "googleapis": "^19.0.0",
     "idx": "^1.5.0",
     "jsonwebtoken": "^7.3.0",

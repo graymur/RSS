@@ -28,15 +28,18 @@ const routes = [{
 }];
 
 function isAuthenticated() {
-	return false;
+	return true;
+	// return false;
 }
 
 function renderRoute(config, index) {
 	const Comp = config.component;
 
-	return config.auth
-		? <AuthenticatedRoute key={index} path={config.path} exact={config.exact} />
-		: <Route key={index} path={config.path} exact={config.exact} render={props => <Comp {...props} />} />;
+	return <Route key={index} path={config.path} exact={config.exact} render={props => <App><Comp {...props} /></App>} />;
+
+	// return config.auth
+	// 	? <AuthenticatedRoute key={index} path={config.path} exact={config.exact} />
+	// 	: <Route key={index} path={config.path} exact={config.exact} render={props => <Comp {...props} />} />;
 }
 
 export default class RootContainer extends React.Component {

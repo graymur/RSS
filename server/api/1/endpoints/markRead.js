@@ -16,6 +16,6 @@ export default async function makrRead(req, res) {
 
 		return res.send({ count: feed.count, unread: feed.unread });
 	} catch (e) {
-		return res.send({error: e.toString()});
+		return res.status(500).send({error: e.toString()});
 	}
 }

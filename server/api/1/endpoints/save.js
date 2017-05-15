@@ -1,10 +1,11 @@
-import { FeedModel } from '../../../models/feed';
-import { GroupModel } from '../../../models/group';
+import {FeedModel} from '../../../models/feed';
+import {GroupModel} from '../../../models/group';
+import getDefaultGroup from '../../../util/getDefaultGroup';
 
 export default async function save(req, res) {
 	try {
 		const user = req.user;
-		const group = await GroupModel.findOne({ user: user._id, title: 'Unsorted' });
+		const group = await getDefaultGroup(user);
 
 		const feed = new FeedModel({
 			user: user._id,
@@ -16,16 +17,16 @@ export default async function save(req, res) {
 
 		await feed.save();
 
-		return res.send({ success: true });
+		return res.send({success: true});
 	} catch (e) {
 		let response = {};
 
 		if (e.code === 11000) {
-			response.error = "You've already added this feed";
+			response.error = 'You\'ve already added this feed';
 		} else {
 			response.error = 'Unknown error';
 		}
 
-		return res.send(response);
+		return res.status(500).send({error: e.toString()});
 	}
 }

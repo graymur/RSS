@@ -12,6 +12,6 @@ export default async function feed(req, res) {
 
 		return res.send(feed);
 	} catch (e) {
-		return res.send({error: e.toString()});
+		return res.status(500).send({error: e.toString()});
 	}
 }

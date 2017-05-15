@@ -16,27 +16,73 @@ export const googleAuthURL = oauth2Client.generateAuthUrl({
 	response_type: 'code'
 });
 
-export const handleLogin = (req, res) => {
-	return new Promise((resolve, reject) => {
-		oauth2Client.getToken(req.query.code, function (err, tokens) {
-			if (err) {
-				reject(err);
-			}
+// export const handleLogin = (req, res) => {
+// 	return new Promise((resolve, reject) => {
+// 		oauth2Client.getToken(req.query.code, function (err, tokens) {
+// 			if (err) {
+// 				reject(err);
+// 			}
+//
+// 			try {
+// 				oauth2Client.setCredentials(tokens);
+//
+// 				google.oauth2('v2').userinfo.v2.me.get({auth: oauth2Client}, (err, profile) => {
+// 					if (err) {
+// 						reject(err);
+// 					}
+//
+// 					resolve({
+// 						service: 'google',
+// 						outerId: profile.id,
+// 						name: profile.name,
+// 						image: profile.picture
+// 					});
+// 				});
+// 			} catch (e) {
+// 				reject(e);
+// 			}
+// 		});
+// 	});
+// }
 
-			oauth2Client.setCredentials(tokens);
+export async function handleLogin(req, res, next) {
+	try {
+		// req.authenticatedUser = await new Promise((resolve, reject) => {
+		// 	oauth2Client.getToken(req.query.code, function (err, tokens) {
+		// 		if (err) {
+		// 			reject(err);
+		// 		}
+		//
+		// 		try {
+		// 			oauth2Client.setCredentials(tokens);
+		//
+		// 			google.oauth2('v2').userinfo.v2.me.get({auth: oauth2Client}, (err, profile) => {
+		// 				if (err) {
+		// 					reject(err);
+		// 				}
+		//
+		// 				resolve({
+		// 					service: 'google',
+		// 					outerId: profile.id,
+		// 					name: profile.name,
+		// 					image: profile.picture
+		// 				});
+		// 			});
+		// 		} catch (e) {
+		// 			reject(e);
+		// 		}
+		// 	});
+		// });
 
-			google.oauth2('v2').userinfo.v2.me.get({auth: oauth2Client}, (err, profile) => {
-				if (err) {
-					reject(err);
-				}
+		req.authenticatedUser = {
+			service: 'google',
+			outerId: '105600203489385681226',
+			name: 'Sergey Repkov',
+			image: 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg'
+		};
 
-				resolve({
-					provider: 'google',
-					id: profile.id,
-					name: profile.name,
-					image: profile.picture
-				});
-			});
-		});
-	});
+		next();
+	} catch (e) {
+		res.status(500).send(String(e)).end();
+	}
 }

@@ -2,6 +2,7 @@ import request from 'utils/request';
 
 function makeRequest(endpoint, data = {}, config = {}) {
     config.method = config.method || 'GET';
+    config.credentials = 'same-origin';
 
     let url;
 
