@@ -1,18 +1,18 @@
-import path from 'path'
-import webpack from 'webpack'
-import config from '../config/config'
-import merge from 'merge-deep'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import htmlPlugin from './util/html-plugin'
+import path from 'path';
+import webpack from 'webpack';
+import config from '../config/config';
+import merge from 'merge-deep';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import htmlPlugin from './util/html-plugin';
 
-import baseWebpackConfig from './webpack.config.base'
+import baseWebpackConfig from './webpack.config.base';
 
 baseWebpackConfig.entry = [
 	'react-hot-loader/patch',
 	'webpack-hot-middleware/client',
 	'webpack/hot/dev-server',
 	baseWebpackConfig.entry.app
-]
+];
 
 const developmentConfig = merge(
 	baseWebpackConfig,
@@ -38,9 +38,9 @@ const developmentConfig = merge(
 				context: config.sourceDir,
 				manifest: require(path.join(config.dllDir, `styles-${process.env.NODE_ENV}-manifest.json`))
 			}),
-			htmlPlugin
+			// htmlPlugin
 		]
 	}
-)
+);
 
-export default developmentConfig
+export default developmentConfig;

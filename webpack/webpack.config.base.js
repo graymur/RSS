@@ -1,10 +1,10 @@
-import path from 'path'
-import webpack from 'webpack'
-import config from '../config/config'
-import cssMqpacker from 'css-mqpacker'
-import autoprefixer from 'autoprefixer'
+import path from 'path';
+import webpack from 'webpack';
+import config from '../config/config';
+import cssMqpacker from 'css-mqpacker';
+import autoprefixer from 'autoprefixer';
 
-import defaultLoaders from './util/default-loaders.js'
+import defaultLoaders from './util/default-loaders.js';
 
 export default {
 	cache: true,
@@ -49,4 +49,4 @@ export default {
 			style: path.join(config.sourceDir, 'style')
 		}
 	}
-}
+};

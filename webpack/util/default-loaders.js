@@ -36,4 +36,4 @@ export default [{
 	test: /\.(png|jpg)$/,
 	// loaders: ['url-loader?limit=8192&name=img/[name].[ext]', 'img-loader?optimizationLevel=7&progressive=true']
 	loaders: ['file-loader?name=img/[name].[ext]', 'img-loader']
-}]
+}];

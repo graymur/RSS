@@ -1,11 +1,11 @@
-import path from 'path'
-import config from '../config/config'
-import merge from 'merge-deep'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import CopyWebpackPlugin from 'copy-webpack-plugin'
-import htmlPlugin from './util/html-plugin'
-import uglifyPlugin from './util/uglify-plugin'
-import baseWebpackConfig from './webpack.config.base'
+import path from 'path';
+import config from '../config/config';
+import merge from 'merge-deep';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import htmlPlugin from './util/html-plugin';
+import uglifyPlugin from './util/uglify-plugin';
+import baseWebpackConfig from './webpack.config.base';
 
 const productionConfig = merge(
 	baseWebpackConfig,
@@ -23,7 +23,7 @@ const productionConfig = merge(
 			uglifyPlugin
 		]
 	}
-)
+);
 
 productionConfig.module.loaders.filter(loader =>
 	loader.loaders && loader.loaders.find(name => /css/.test(name.split('?')[0]))
@@ -32,13 +32,13 @@ productionConfig.module.loaders.filter(loader =>
 	loader.loader = ExtractTextPlugin.extract({
 		fallbackLoader,
 		loader: rest.join('!')
-	})
+	});
 
-	delete loader.loaders
-})
+	delete loader.loaders;
+});
 
 // export default productionConfig
 
 // uncomment to see bundle analyzer report
-import addBundleAnalyzerPlugin from './util/add-bundle-analyzer-plugin'
-export default addBundleAnalyzerPlugin(productionConfig)
+import addBundleAnalyzerPlugin from './util/add-bundle-analyzer-plugin';
+export default addBundleAnalyzerPlugin(productionConfig);

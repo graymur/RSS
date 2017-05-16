@@ -7,4 +7,4 @@ export default new HtmlWebpackPlugin({
 	hash: true,
 	filename: 'index.html',
 	template: path.join(config.sourceDir, 'index.ejs')
-})
+});

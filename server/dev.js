@@ -16,22 +16,26 @@ import checkAuth from './middlewares/checkAuth';
 
 const app = express();
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use(session({
-	secret: 'keyboard cat',
-	httpOnly: false
-}));
+app.use(session({secret: 'keyboard warrior'}));
 
 app.use((req, res, next) => {
-	req.initialState = {};
+	req.initialState = {global: {}};
+
+	if (req.session.auth) {
+		req.initialState.global.token = req.session.auth;
+	}
+
 	next();
 });
 
 app.get('/login', (req, res, next) => {
-	req.initialState.global = {googleAuthURL};
+	req.initialState.global.googleAuthURL = googleAuthURL;
 	next();
 });
 
@@ -61,25 +65,19 @@ app.use(webpackDevMiddleware(compiler, {
 	quiet: true,
 	stats: {
 		colors: true
-	}
+	},
+	serverSideRender: true
 }));
 
 app.use(webpackHotMiddleware(compiler));
 
-// make all URLs respond with hot-wired index.html
-app.use('*', (req, res, next) => {
-	const filename = path.join(compiler.outputPath, 'index.html');
-
-	compiler.outputFileSystem.readFile(filename, (err, result) => {
-		if (err) {
-			return next(err);
-		}
-
-		result = result.toString('utf8').replace('<body>', `<body>\n<script>window.initialState = ${JSON.stringify(req.initialState)}</script>\n`);
-
-		res.set('content-type', 'text/html');
-		res.send(result);
-		res.end();
+app.use((req, res) => {
+	const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName
+	res.render('index', {
+		env: process.env.NODE_ENV,
+		cssFiles: assetsByChunkName.main.filter(path => path.endsWith('.css')),
+		jsFiles: assetsByChunkName.main.filter(path => path.endsWith('.js')),
+		initialState: req.initialState
 	});
 });
 

@@ -30,7 +30,7 @@ export class Feed extends React.Component {
     };
 
 	handleUpdateClick = e => {
-		this.props.updateFeed(this.props.feed.id)
+		this.props.updateFeed(this.props.feed.id);
 	}
 
     render() {

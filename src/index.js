@@ -21,13 +21,13 @@ const renderWithHot = Component => {
 			<Component />
 		</AppContainer>,
 		root
-	)
+	);
 };
 
 renderWithHot(App);
 
 if (module.hot) {
 	module.hot.accept('./Root.jsx', () => {
-		renderWithHot(require('./Root.jsx').default)
+		renderWithHot(require('./Root.jsx').default);
 	});
 }

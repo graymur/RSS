@@ -33,6 +33,6 @@ export class LoginPage extends React.Component {
 
 const mapStateToProps = ({ global }) => ({
 	googleAuthURL: global.googleAuthURL
-})
+});
 
 export default connect(mapStateToProps, {})(LoginPage);

@@ -52,7 +52,7 @@ export default class RootContainer extends React.Component {
 					</Switch>
 				</BrowserRouter>
 			</Provider>
-		)
+		);
 	}
 }
 
@@ -67,4 +67,4 @@ const AuthenticatedRoute = ({component: Comp, ...rest}) => ( // eslint-disable-l
       }} />
     )
   )} />
-)
+);

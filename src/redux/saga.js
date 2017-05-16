@@ -5,5 +5,5 @@ export default function * saga() {
 	yield [
 		...HomePageSagas,
 		...FormPageSagas
-	]
+	];
 }

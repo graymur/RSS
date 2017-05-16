@@ -1,8 +1,7 @@
-import merge from 'merge-deep'
-import config from '../config/config'
-import nodeExternals from 'webpack-node-externals'
+import merge from 'merge-deep';
+import nodeExternals from 'webpack-node-externals';
 
-import baseWebpackConfig from './webpack.config.base'
+import baseWebpackConfig from './webpack.config.base';
 
 export default merge(
 	baseWebpackConfig,
@@ -10,4 +9,4 @@ export default merge(
 		target: 'node',
 		externals: [nodeExternals()]
 	}
-)
+);

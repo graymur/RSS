@@ -1,8 +1,8 @@
-import path from 'path'
-import webpack from 'webpack'
-import config from '../config/config'
-import uglifyPlugin from './util/uglify-plugin'
-import defaultLoaders from './util/default-loaders'
+import path from 'path';
+import webpack from 'webpack';
+import config from '../config/config';
+import uglifyPlugin from './util/uglify-plugin';
+import defaultLoaders from './util/default-loaders';
 
 const dllConfig = {
 	entry: {
@@ -29,10 +29,10 @@ const dllConfig = {
 			}
 		})
 	]
-}
+};
 
 if (process.env.NODE_ENV === 'production') {
 	dllConfig.plugins.push(uglifyPlugin)
-}
+};
 
-export default dllConfig
+export default dllConfig;
