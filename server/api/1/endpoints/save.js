@@ -1,5 +1,4 @@
 import {FeedModel} from '../../../models/feed';
-import {GroupModel} from '../../../models/group';
 import getDefaultGroup from '../../../util/getDefaultGroup';
 
 export default async function save(req, res) {

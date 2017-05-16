@@ -1,10 +1,10 @@
 import express from 'express';
 import * as handlers from './endpoints';
-// import userMiddleware from './middleware/user.js';
-const router = express.Router();
-import checkAuth from '../../middlewares/checkAuth'
+import checkAuth from '../../middlewares/checkAuth';
 
-import db from '../../db';
+const router = express.Router();
+
+import db from '../../db'; // eslint-disable-line
 
 // router.use(userMiddleware);
 

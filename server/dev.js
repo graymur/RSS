@@ -1,5 +1,5 @@
 import path from 'path';
-import express  from 'express';
+import express from 'express';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
@@ -40,11 +40,11 @@ app.get('/login', (req, res, next) => {
 });
 
 app.get('/login/google', handleGoogleLogin, authenticate);
- 
+
 app.all('/', checkAuth);
 app.all('/form', checkAuth);
 
-app.use('/node_modules', express.static(path.resolve(__dirname + '/../node_modules')));
+app.use('/node_modules', express.static(path.join(__dirname, '/../node_modules')));
 app.use('/api/1/', api);
 
 app.all('/*', function (req, res, next) {
@@ -72,7 +72,7 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler));
 
 app.use((req, res) => {
-	const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName
+	const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName;
 	res.render('index', {
 		env: process.env.NODE_ENV,
 		cssFiles: assetsByChunkName.main.filter(path => path.endsWith('.css')),
@@ -83,5 +83,5 @@ app.use((req, res) => {
 
 app.listen(3000, () => {
 	console.log(`Listening at ${config.host}:${config.devPort}`);
-	// opener(`http://${config.host}:${config.devPort}`);
+	opener(`http://${config.host}:${config.devPort}`);
 });

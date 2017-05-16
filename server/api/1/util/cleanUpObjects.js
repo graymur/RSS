@@ -6,7 +6,7 @@ export function cleanUp(arg) {
             });
 
             return cleanUp(item);
-        }
+        };
     } else {
         arg.id = arg._id;
         delete arg._id;
@@ -24,7 +24,7 @@ export function toCleanObject(arg) {
     if (Array.isArray(arg)) {
         return function (item) {
             return cleanUp(arg)(toObject(item));
-        }
+        };
     } else {
         return cleanUp(toObject(arg));
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import find from 'lodash/find';
+// import find from 'lodash/find';
 // import GeminiScrollbar from 'react-gemini-scrollbar';
 
 import { connect } from 'react-redux';

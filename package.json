@@ -4,6 +4,7 @@
   "description": "RSS reader on ReactJS",
   "main": "./src/index.js",
   "scripts": {
+    "lint": "eslint server/**/*.js src/**/*.js webpack/**/*.js --ignore-pattern *.test.js",
     "test": "better-npm-run test",
     "test:watch": "npm run test -- --watch",
     "start": "babel-node ./server/prod.js",

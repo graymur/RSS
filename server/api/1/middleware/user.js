@@ -1,4 +1,4 @@
-import { UserModel } from '../../../models/user';
+// import { UserModel } from '../../../models/user';
 
 export default async function user(req, res, next) {
 	// const user = await UserModel.findOne({outerId: 1});

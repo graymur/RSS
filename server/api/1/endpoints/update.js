@@ -58,4 +58,3 @@ export default async function (req, res) {
 		return res.status(500).send({error: e.toString()});
 	}
 }
-

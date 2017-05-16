@@ -1,3 +1,4 @@
+import addBundleAnalyzerPlugin from './util/add-bundle-analyzer-plugin';
 import path from 'path';
 import config from '../config/config';
 import merge from 'merge-deep';
@@ -28,7 +29,7 @@ const productionConfig = merge(
 productionConfig.module.loaders.filter(loader =>
 	loader.loaders && loader.loaders.find(name => /css/.test(name.split('?')[0]))
 ).forEach(loader => {
-	const [fallbackLoader, ...rest] = loader.loaders
+	const [fallbackLoader, ...rest] = loader.loaders;
 	loader.loader = ExtractTextPlugin.extract({
 		fallbackLoader,
 		loader: rest.join('!')
@@ -40,5 +41,4 @@ productionConfig.module.loaders.filter(loader =>
 // export default productionConfig
 
 // uncomment to see bundle analyzer report
-import addBundleAnalyzerPlugin from './util/add-bundle-analyzer-plugin';
 export default addBundleAnalyzerPlugin(productionConfig);

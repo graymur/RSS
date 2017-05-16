@@ -32,7 +32,7 @@ const dllConfig = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-	dllConfig.plugins.push(uglifyPlugin)
+	dllConfig.plugins.push(uglifyPlugin);
 };
 
 export default dllConfig;

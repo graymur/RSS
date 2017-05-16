@@ -1,4 +1,4 @@
-import webpack from 'webpack'
+import webpack from 'webpack';
 
 export default new webpack.optimize.UglifyJsPlugin({
 	compress: {
@@ -8,7 +8,7 @@ export default new webpack.optimize.UglifyJsPlugin({
 	output: {
 		comments: function(node, comment) {
 			if (comment.type === 'comment2') {
-				return /@copyright/i.test(comment.value)
+				return /@copyright/i.test(comment.value);
 			}
 		}
 	}
