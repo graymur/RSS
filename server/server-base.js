@@ -1,12 +1,6 @@
 import path from 'path';
 import express from 'express';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpack from 'webpack';
-import opener from 'opener';
 import session from 'express-session';
-import webpackConfig from '../webpack/webpack.config.dev.js';
-import config from '../config/config';
 import api from './api/1/index';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
@@ -58,30 +52,4 @@ app.all('/*', function (req, res, next) {
 	}
 });
 
-const compiler = webpack(webpackConfig);
-
-app.use(webpackDevMiddleware(compiler, {
-	publicPath: webpackConfig.output.publicPath,
-	quiet: true,
-	stats: {
-		colors: true
-	},
-	serverSideRender: true
-}));
-
-app.use(webpackHotMiddleware(compiler));
-
-app.use((req, res) => {
-	const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName;
-	res.render('index', {
-		env: process.env.NODE_ENV,
-		cssFiles: assetsByChunkName.main.filter(path => path.endsWith('.css')),
-		jsFiles: assetsByChunkName.main.filter(path => path.endsWith('.js')),
-		initialState: req.initialState
-	});
-});
-
-app.listen(3000, () => {
-	console.log(`Listening at ${config.host}:${config.devPort}`);
-	opener(`http://${config.host}:${config.devPort}`);
-});
+export default app;

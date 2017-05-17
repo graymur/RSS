@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'path';
 
 export default {
 	sourceDir: path.resolve(path.join(__dirname, '/../src')),
@@ -10,4 +10,4 @@ export default {
 	host: 'localhost',
 	googleClientId: '...',
 	googleClientSecret: '...'
-}
+};
