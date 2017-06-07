@@ -17,6 +17,11 @@ export const selectError = () => createSelector(
     globalState => globalState.error
 );
 
+export const isAuthenticated = () => createSelector(
+	selectGlobal(),
+	globalState => globalState.token
+);
+
 // const selectLocationState = () => {
 //     let prevRoutingState;
 //     let prevRoutingStateJS;

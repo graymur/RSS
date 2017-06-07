@@ -1,6 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'style/main.scss';
 
+import idx from 'idx';
+
 import {Provider} from 'react-redux';
 import createStore from 'redux/createStore';
 
@@ -27,19 +29,14 @@ const routes = [{
 	component: LoginPage
 }];
 
-function isAuthenticated() {
-	return true;
-	// return false;
-}
+const isAuthenticated = () => idx(window, _ => _.initialState.global.token);
 
 function renderRoute(config, index) {
 	const Comp = config.component;
 
-	return <Route key={index} path={config.path} exact={config.exact} render={props => <App><Comp {...props} /></App>} />;
-
-	// return config.auth
-	// 	? <AuthenticatedRoute key={index} path={config.path} exact={config.exact} />
-	// 	: <Route key={index} path={config.path} exact={config.exact} render={props => <Comp {...props} />} />;
+	return config.auth
+		? <AuthenticatedRoute key={index} path={config.path} exact={config.exact} component={Comp} />
+		: <Route key={index} path={config.path} exact={config.exact} render={props => <Comp {...props} />} />;
 }
 
 export default class RootContainer extends React.Component {

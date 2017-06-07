@@ -44,7 +44,7 @@ export class Feed extends React.Component {
 
 				{/*<GeminiScrollbar>*/}
                 { posts ? posts.map((post, index) => (
-                    <Post key={index} {...post} onSelect={() => selectPost(post.id)} isCurrent={post.id === currentPostId} />
+                    <Post key={index + feed.id} {...post} onSelect={() => selectPost(post.id)} isCurrent={post.id === currentPostId} />
                 )) : null }
 				{/*</GeminiScrollbar>*/}
             </div>
