@@ -59,7 +59,7 @@ export const selectCurrentPost = () => createSelector(
         if (!currentPostId) return false;
         if (!currentFeed.id) return false;
 
-        const found = currentFeed.posts.filter(post => post.id === currentPostId);
+        const found = (currentFeed.posts || []).filter(post => post.id === currentPostId);
         return found.length ? found[0] : false;
     }
 );
