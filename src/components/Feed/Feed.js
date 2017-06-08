@@ -37,7 +37,7 @@ export class Feed extends React.Component {
         const showUpdateInfo = Boolean(!loading && feed && !posts.length);
 
         return (
-            <div className='feed'>
+            <div className='feed' key={posts.length}>
                 { loading ? <Centered><Loader size={100} /></Centered> : null }
                 { showUpdateInfo ? <UpdateMessage onUpdateFeed={this.handleUpdateClick} /> : null }
 

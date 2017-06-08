@@ -1,119 +1,147 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
+import {createStructuredSelector} from 'reselect';
+import {connect} from 'react-redux';
 import * as selectors from './selectors';
 import Loader from 'components/Loader/Loader';
 import ErrorElement from './ErrorElement.js';
-import { checkFeed, resetFeed, saveFeed } from './actions';
+import {checkFeed, resetFeed, saveFeed, editFeed, clearFeedData} from './actions';
+import idx from 'idx';
+import {Link} from 'react-router-dom';
 
 import './form.scss';
 
+const initialState = {
+	id: '',
+	url: '',
+	title: ''
+};
+
 export class FormPage extends React.Component {
-    constructor(props) {
-        super(props);
+	constructor(props) {
+		super(props);
+		this.state = {...initialState};
+	}
 
-        this.state = {
-            feedUrl: '',
-            feedTitle: ''
-        };
-    }
+	componentWillMount() {
+		const {match, data, editFeed, clearFeedData} = this.props;
+		const feedId = idx(match, _ => _.params.id);
 
-    componentWillReceiveProps(props) {
-        if (props.data && props.data.title) {
-            this.setState({ feedTitle: props.data.title });
-        }
-    }
+		/**
+		 * User switched from editing feed to creating,
+		 * we need to clear previous feed data
+		 */
+		if (!feedId && data.id) {
+			clearFeedData();
+			/**
+			 * Start editing feed, populate data
+			 */
+		// } else if ((feedId && !data.id) || feedId !== data.id) {
+		} else if (feedId) {
+			editFeed(feedId);
+		}
+	}
 
-    handleUrlChange = event => {
-        this.setState({ feedUrl: event.target.value });
-        this.props.resetFeed();
-    }
+	componentWillReceiveProps(props) {
+		if (props.data && !props.saving) {
+			this.setState({...props.data});
+		} else if (!props.saving) {
+			this.setState({...initialState});
+		}
+	}
 
-    handleTitleChange = event => {
-        this.setState({ feedTitle: event.target.value });
-    }
+	handleFieldChange = field => event => {
+		this.setState({[field]: event.target.value});
+	}
 
-    handleSubmit = event => {
-        event.preventDefault();
+	handleUrlChange = event => {
+		this.handleFieldChange('url')(event);
+		this.props.resetFeed();
+	}
 
-        this.props.saveFeed({
-            url: this.state.feedUrl,
-            title: this.state.feedTitle,
-            realTitle: this.props.data.realTitle
-        });
-    }
-
-    checkFeed = event => {
+	handleSubmit = event => {
 		event.preventDefault();
-        const url = this.state.feedUrl;
-        this.props.checkFeed(url);
-    }
+		this.props.saveFeed({...this.state, realTitle: this.props.data.title});
+	}
 
-    valid() {
-        return this.state.feedTitle.length > 0;
-    }
+	checkFeed = event => {
+		event.preventDefault();
+		const url = this.state.url;
+		this.props.checkFeed(url);
+	}
 
-    render() {
-        const { loading, data, error, saved } = this.props;
+	valid() {
+		return this.state.title.length > 0;
+	}
 
-        const showStyle = { display: data && data.title ? 'block' : 'none' };
-        const hideStyle = { display: data && data.title ? 'none' : 'block' };
+	render() {
+		const {loading, data, error, saved} = this.props;
 
-        return (
-            <div className='form'>
-                <form onSubmit={this.handleSubmit}>
-                    <div className='form-group'>
-                        <label htmlFor='feedUrl'>Feed URL</label>
-                        <input type='url' className='form-control' id='feedUrl' name='feedUrl' placeholder='Feed URL' value={this.state.feedUrl} onChange={this.handleUrlChange} />
-                    </div>
-                    <div className='form-group' style={hideStyle}>
-                        <button className='button btn btn-default' onClick={this.checkFeed} disabled={loading || !this.state.feedUrl.length}>Check feed</button>
-                        {loading ? <Loader size={34} /> : null}
-                    </div>
-                    <div className='form-group' style={showStyle}>
-                        <label htmlFor='feedTitle'>Feed Title</label>
-                        <input type='text' className='form-control' id='feedTitle' name='feedTitle' placeholder='Feed title' value={this.state.feedTitle} onChange={this.handleTitleChange} />
-                    </div>
-                    <div className='form-group' style={showStyle}>
-                        <button className='button btn btn-default' type='submit' disabled={error || saved || loading || !this.valid()}>Save feed</button>
-                        {loading ? <Loader size={34} /> : null}
-                    </div>
-                    {error ? <ErrorElement error={error} /> : null}
-                    {saved ? <h6>Feed was successfully saved</h6> : null}
-                </form>
-            </div>
-        );
-    }
+		const showStyle = {display: data && data.title ? 'block' : 'none'};
+		const hideStyle = {display: data && data.title ? 'none' : 'block'};
+
+		return (
+			<div className='form'>
+				<form onSubmit={this.handleSubmit}>
+					<input type='hidden' name='id' value={this.state.id}/>
+					<div className='form-group'>
+						<label htmlFor='url'>Feed URL</label>
+						<input type='url' className='form-control' id='url' name='url' placeholder='Feed URL' value={this.state.url} onChange={this.handleUrlChange}/>
+					</div>
+					<div className='form-group' style={hideStyle}>
+						<button className='button btn btn-default' onClick={this.checkFeed} disabled={loading || !this.state.url.length}>Check feed</button>
+						<Link to='/' className='button btn btn-default'>Cancel</Link>
+						{loading ? <Loader size={34}/> : null}
+					</div>
+					<div className='form-group' style={showStyle}>
+						<label htmlFor='title'>Feed Title</label>
+						<input type='text' className='form-control' id='title' name='title' placeholder='Feed title' value={this.state.title} onChange={this.handleFieldChange('title')}/>
+					</div>
+					<div className='form-group' style={showStyle}>
+						<button className='button btn btn-default' type='submit' disabled={error || loading || !this.valid()}>Save feed</button>
+						<Link to='/' className='button btn btn-default'>Cancel</Link>
+						{loading ? <Loader size={34}/> : null}
+					</div>
+					{error ? <ErrorElement error={error}/> : null}
+					{saved ? <h6>Feed was successfully saved</h6> : null}
+				</form>
+			</div>
+		);
+	}
 }
 
 FormPage.propTypes = {
-    checkFeed: PropTypes.func,
-    resetFeed: PropTypes.func,
-    saveFeed: PropTypes.func,
-    loading: PropTypes.bool,
-    // valid: PropTypes.bool,
-    saved: PropTypes.bool,
-    error: PropTypes.oneOfType([
-        PropTypes.object,
-        PropTypes.bool
-    ]),
-    data: PropTypes.oneOfType([
-        PropTypes.object,
-        PropTypes.bool
-    ])
+	match: PropTypes.any,
+	checkFeed: PropTypes.func,
+	resetFeed: PropTypes.func,
+	saveFeed: PropTypes.func,
+	editFeed: PropTypes.func,
+	clearFeedData: PropTypes.func,
+	loading: PropTypes.bool,
+	saved: PropTypes.bool,
+	saving: PropTypes.bool,
+	error: PropTypes.oneOfType([
+		PropTypes.object,
+		PropTypes.bool
+	]),
+	data: PropTypes.oneOfType([
+		PropTypes.object,
+		PropTypes.bool
+	])
 };
 
 const mapStateToProps = createStructuredSelector({
-    loading: selectors.selectLoading(),
-    // valid: selectors.selectLoading(),
-    error: selectors.selectError(),
-    data: selectors.selectData(),
-    saved: selectors.selectSaved()
+	loading: selectors.selectLoading(),
+	error: selectors.selectError(),
+	data: selectors.selectData(),
+	saved: selectors.selectSaved(),
+	saving: selectors.selectSaving()
 });
 
 export default connect(mapStateToProps, {
-    checkFeed,
-    resetFeed,
-    saveFeed
+	checkFeed,
+	resetFeed,
+	saveFeed,
+	editFeed,
+	clearFeedData
 })(FormPage);

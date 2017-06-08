@@ -36,7 +36,7 @@ app.get('/login', (req, res, next) => {
 app.get('/login/google', handleGoogleLogin, authenticate);
 
 app.all('/', checkAuth);
-app.all('/form', checkAuth);
+app.all('/form*', checkAuth);
 
 app.use('/node_modules', express.static(path.join(__dirname, '/../node_modules')));
 app.use('/api/1/', api);

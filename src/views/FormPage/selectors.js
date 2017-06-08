@@ -17,6 +17,11 @@ export const selectSaved = () => createSelector(
     formState => formState.saved
 );
 
+export const selectSaving = () => createSelector(
+    selectForm(),
+    formState => formState.saving
+);
+
 export const selectData = () => createSelector(
     selectForm(),
     formState => formState.data

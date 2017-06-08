@@ -6,7 +6,8 @@ export const initialState = {
     loading: false,
     error: false,
     data: {},
-    saved: false
+    saved: false,
+	saving: false
 };
 
 export default handleActions({
@@ -17,7 +18,9 @@ export default handleActions({
 	},
 	[actions.checkFeedFailure]: (state, action) => ({ ...state, loading: false, error: action.payload, valid: false, data: {} }),
 	[actions.resetFeed]: () => initialState,
-	[actions.saveFeed]: (state) => ({ ...state, loading: true }),
-	[actions.saveFeedSuccess]: (state) => ({ ...state, loading: false, saved: true }),
-	[actions.saveFeedFailure]: (state, action) => ({ ...state, loading: false, error: action.payload, saved: false })
+	[actions.saveFeed]: (state) => ({ ...state, loading: true, saving: true }),
+	[actions.saveFeedSuccess]: (state) => ({ ...state, loading: false, saved: true, saving: false }),
+	[actions.saveFeedFailure]: (state, action) => ({ ...state, loading: false, error: action.payload, saved: false, saving: false }),
+	[actions.setFeedToEdit]: (state, action) => ({ ...state, data: {...action.payload}, loading: false, error: false }),
+	[actions.clearFeedData]: (state) => initialState
 }, initialState);

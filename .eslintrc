@@ -21,6 +21,7 @@
 		"react/no-unused-prop-types": 1,
 		"comma-dangle": 1,
 		"spaced-comment": 0,
-		"react/prop-types": 1
+		"react/prop-types": 1,
+		"react/jsx-space-before-closing": 0
 	}
 }

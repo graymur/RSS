@@ -17,7 +17,6 @@ import './home.scss';
 export class HomePage extends React.Component {
     static propTypes = {
         feedsByGroups: PropTypes.array.isRequired,
-        feeds: PropTypes.array.isRequired,
         fetchFeeds: PropTypes.func.isRequired
     };
 
@@ -38,7 +37,7 @@ export class HomePage extends React.Component {
     }
 
     fetchFeeds() {
-        if (!this.props.feeds.length) {
+        if (!this.props.feedsByGroups.length) {
             this.props.fetchFeeds();
         }
     }
@@ -75,7 +74,7 @@ export class HomePage extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-    feeds: selectors.selectFeeds(),
+    // feeds: selectors.selectFeeds(),
     feedsByGroups: selectors.selectFeedsByGroups()
 });
 

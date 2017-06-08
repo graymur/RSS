@@ -1,7 +1,8 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import {call, put, takeEvery} from 'redux-saga/effects';
 
 // import * as constants from '../constants.js';
 import * as actions from '../actions';
+import {updateFeedData} from 'views/HomePage/actions';
 
 import api from 'utils/api.js';
 
@@ -17,6 +18,8 @@ export function * saveFeed(action) {
 			throw new Error(data.error);
 		}
 
+		yield put(actions.setFeedToEdit(data.feed));
+		yield put(updateFeedData(data.feed));
 		yield put(actions.saveFeedSuccess(data));
 	} catch (e) {
 		yield put(actions.saveFeedFailure(e));

@@ -1,47 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import {connect} from 'react-redux';
+import {createStructuredSelector} from 'reselect';
 
 import * as selectors from 'views/HomePage/selectors.js';
-import { updateFeed } from 'views/HomePage/actions.js';
+import {updateFeed} from 'views/HomePage/actions.js';
+
+import {Link} from 'react-router-dom';
 
 import './feed-info.scss';
 
 export class FeedInfo extends React.PureComponent {
-    static propTypes = {
-        feed: PropTypes.object,
-        updateFeed: PropTypes.func.isRequired
-    };
+	static propTypes = {
+		feed: PropTypes.object,
+		updateFeed: PropTypes.func.isRequired
+	};
 
-    // shouldComponentUpdate(newProps) {
-    //     if (this.props.feed) {
-    //         return this.props.feed && this.props.feed.id !== newProps.feed.id;
-    //     }
-	//
-    //     return true;
-    // }
+	render() {
+		const {feed, updateFeed} = this.props;
 
-    render() {
-        const { feed, updateFeed } = this.props;
+		if (!feed) return null;
 
-        if (!feed) return null;
-
-        return (
-            <div className='feed-info'>
-                <input value={feed.url} className='url form-control' readOnly={Boolean(true)} />
-                <a href='#' onClick={() => updateFeed(feed.id)} className='item btn btn-default' role='button'>Update feed</a>
-                <a href='#' className='item btn btn-default' role='button'>Edit feed</a>
-            </div>
-        );
-    }
+		return (
+			<div className='feed-info'>
+				<input value={feed.url} className='url form-control' readOnly={Boolean(true)}/>
+				<a href='#' onClick={() => updateFeed(feed.id)} className='item btn btn-default' role='button'>Update feed</a>
+				<Link to={`/form/${feed.id}`} className='item btn btn-default' role='button'>
+					Edit feed
+				</Link>
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = createStructuredSelector({
-    feed: selectors.selectCurrentFeed()
+	feed: selectors.selectCurrentFeed()
 });
 
 export default connect(mapStateToProps, {
-    updateFeed
+	updateFeed
 })(FeedInfo);

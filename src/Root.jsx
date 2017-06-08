@@ -21,6 +21,10 @@ const routes = [{
 	component: HomePage,
 	auth: true
 }, {
+	path: '/form/:id',
+	component: FormPage,
+	auth: true
+}, {
 	path: '/form',
 	component: FormPage,
 	auth: true

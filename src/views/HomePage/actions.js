@@ -13,6 +13,7 @@ export const fetchFeedEnd = createAction('HomePage.fetchFeedEnd', id => id);
 export const fetchFeedSuccess = createAction('HomePage.fetchFeedSuccess', feed => feed);
 export const fetchFeedError = createAction('HomePage.fetchFeedError', error => error);
 export const updateFeed = createAction('HomePage.updateFeed', id => id);
+export const updateFeedData = createAction('HomePage.updateFeedData', feed => feed);
 export const updateFeedSuccess = createAction('HomePage.updateFeedSuccess', feed => feed);
 export const updateFeedError = createAction('HomePage.updateFeedError', error => error);
 

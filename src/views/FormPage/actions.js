@@ -7,3 +7,6 @@ export const resetFeed = createAction('FormPage.resetFeed', () => {});
 export const saveFeed = createAction('FormPage.saveFeed', feed => feed);
 export const saveFeedSuccess = createAction('FormPage.saveFeedSuccess', data => data);
 export const saveFeedFailure = createAction('FormPage.saveFeedFailure', error => error);
+export const editFeed = createAction('FormPage.editFeed', id => id);
+export const setFeedToEdit = createAction('FormPage.setFeedToEdit', feed => feed);
+export const clearFeedData = createAction('FormPage.clearFeedData', () => {});

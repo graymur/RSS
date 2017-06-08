@@ -1,7 +1,12 @@
 @import "~style/main.scss";
 
 .form {
+	padding-top: 2rem;
 	@extend %padded;
+
+	.loader {
+		margin-left: 2rem;
+	}
 }
 
 .error {
@@ -10,5 +15,7 @@
 }
 
 .button {
-	margin-right: 2rem;
+	margin-right: 1rem;
 }
+
+
