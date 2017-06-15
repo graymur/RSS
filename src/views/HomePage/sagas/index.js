@@ -1,13 +1,15 @@
-import fetchFeedSaga from './fetchFeed';
+import updateFeedPostsSaga from './updateFeedPosts';
 import fetchFeedsSaga from './fetchFeeds';
 import markReadSaga from './markRead';
 import selectFeedSaga from './selectFeed';
-import updateFeedSaga from './updateFeed';
+// import updateFeedSaga from './updateFeed';
+import selectGroupSaga from './selectGroup';
 
 export default [
-	fetchFeedSaga(),
+	updateFeedPostsSaga(),
 	fetchFeedsSaga(),
 	markReadSaga(),
 	selectFeedSaga(),
-	updateFeedSaga()
+	// updateFeedSaga(),
+	selectGroupSaga()
 ];

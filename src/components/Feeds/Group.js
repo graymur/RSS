@@ -2,23 +2,42 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Item from './Item.js';
 
+import {connect} from 'react-redux';
+import {selectGroup} from 'views/HomePage/actions.js';
+import {createStructuredSelector} from 'reselect';
+import * as selectors from 'views/HomePage/selectors.js';
+import classNames from 'classnames';
+
 import './feeds.scss';
 
 class Group extends React.Component {
-    static propTypes = {
-        title: PropTypes.string.isRequired,
-        feeds: PropTypes.array.isRequired
-    };
+	static propTypes = {
+		id: PropTypes.string.isRequired,
+		title: PropTypes.string.isRequired,
+		currentGroupId: PropTypes.string,
+		feeds: PropTypes.array.isRequired,
+		selectGroup: PropTypes.func.isRequired
+	};
 
-    render() {
-        const { title, feeds } = this.props;
-        return (
-            <div className='feeds__group'>
-                <h5 className='feeds__group__title'>{title}</h5>
-                {feeds.map((feed, index) => <Item key={index} {...feed} />)}
-            </div>
-        );
-    }
+	handleGroupClick = e => {
+		this.props.selectGroup(this.props.id);
+	}
+
+	render() {
+		const {id, title, feeds, currentGroupId} = this.props;
+		const className = classNames('feeds__group__title', {'_current': currentGroupId === id});
+
+		return (
+			<div className='feeds__group'>
+				<h5 className={className} onClick={this.handleGroupClick}>{title}</h5>
+				{feeds.map((feed, index) => <Item key={index} {...feed} />)}
+			</div>
+		);
+	}
 }
 
-export default Group;
+const mapStateToProps = createStructuredSelector({
+	currentGroupId: selectors.selectCurrentGroupId()
+});
+
+export default connect(mapStateToProps, {selectGroup})(Group);

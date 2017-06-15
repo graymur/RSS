@@ -6,14 +6,14 @@ const router = express.Router();
 
 import db from '../../db'; // eslint-disable-line
 
-// router.use(userMiddleware);
-
 router.get('/feeds', checkAuth, handlers.feeds);
 router.get('/feed', checkAuth, handlers.feed);
 router.get('/check', checkAuth, handlers.check);
 router.get('/fetch', checkAuth, handlers.fetch);
-router.get('/update', checkAuth, handlers.update);
+router.get('/update-feed-posts', checkAuth, handlers.updateFeedPosts);
 router.put('/save', checkAuth, handlers.save);
 router.post('/mark-read', checkAuth, handlers.markRead);
+router.get('/group-posts', checkAuth, handlers.groupPosts);
+router.get('/posts', checkAuth, handlers.posts);
 
 export default router;

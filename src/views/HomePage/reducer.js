@@ -1,4 +1,4 @@
-import find from 'lodash/find';
+// import find from 'lodash/find';
 import findIndex from 'lodash/findIndex';
 import {handleActions} from 'redux-actions';
 import * as actions from './actions';
@@ -7,43 +7,37 @@ const initialState = {
 	groups: [],
 	feeds: [],
 	posts: [],
-	currentFeed: {},
-	currentFeedId: '',
-	currentPostId: '',
+	postsById: {},
+	currentGroupId: undefined,
+	currentFeedId: undefined,
+	currentPostId: undefined,
 	postsLoading: false
 };
 
 export default handleActions({
-	[actions.fetchFeedsSuccess]: (state, action) => {
-		return {...state, feeds: action.payload.feeds, groups: action.payload.groups};
-	},
-	[actions.fetchFeed]: (state, action) => {
-		return {...state, currentPost: false};
-	},
-	[actions.selectFeed]: (state, action) => {
-		const curentFeed = find(state.feeds, {id: action.payload});
-		return {...state, currentFeedId: curentFeed.id, posts: curentFeed.posts};
-	},
-	[actions.fetchFeedStart]: (state, action) => {
-		const feedIndex = findIndex(state.feeds, {id: action.payload});
-		const feeds = [...state.feeds];
-		feeds[feedIndex].loading = true;
+	[actions.fetchFeedsSuccess]: (state, action) => ({...state, feeds: action.payload.feeds, groups: action.payload.groups}),
 
-		return {...state, feeds, postsLoading: true};
-	},
-	[actions.fetchFeedEnd]: (state, action) => {
-		return state;
-	},
-	[actions.fetchFeedSuccess]: (state, action) => {
-		const feedIndex = findIndex(state.feeds, {id: action.payload.id});
-		const feeds = [...state.feeds];
-		feeds[feedIndex] = action.payload;
-
-		return {...state, feeds, postsLoading: false, currentFeedId: action.payload.id, posts: action.payload.posts};
-	},
-	[actions.selectPost]: (state, action) => {
-		return {...state, currentPostId: action.payload};
-	},
+	[actions.selectFeed]: (state, {payload}) => ({...state, currentFeedId: payload, currentGroupId: undefined}),
+	// [actions.fetchFeed]: (state, action) => {
+	// 	return {...state, currentPost: false};
+	// },
+	// [actions.fetchFeedStart]: (state, action) => {
+	// 	const feedIndex = findIndex(state.feeds, {id: action.payload});
+	// 	const feeds = [...state.feeds];
+	// 	feeds[feedIndex].loading = true;
+	//
+	// 	return {...state, feeds, postsLoading: true};
+	// },
+	// [actions.fetchFeedEnd]: (state, action) => {
+	// 	return state;
+	// },
+	// [actions.fetchFeedSuccess]: (state, action) => {
+	// 	const feedIndex = findIndex(state.feeds, {id: action.payload.id});
+	// 	const feeds = [...state.feeds];
+	// 	feeds[feedIndex] = action.payload;
+	//
+	// 	return {...state, feeds, postsLoading: false, currentFeedId: action.payload.id, currentGroupId: ''};
+	// },
 	[actions.markRead]: (state, {payload: {feedId, id}}) => {
 		const feeds = [...state.feeds];
 		const feedIndex = findIndex(feeds, {id: feedId});
@@ -76,5 +70,27 @@ export default handleActions({
 		}
 
 		return {...state, feeds: feeds};
-	}
+	},
+	[actions.selectGroup]: (state, {payload}) => ({...state, currentGroupId: payload, currentFeedId: undefined, currentPostId: undefined}),
+
+	[actions.fetchPostsStart]: (state, action) => ({...state, postsLoading: true}),
+	[actions.fetchPostsEnd]: (state, action) => ({...state, postsLoading: false}),
+	[actions.fetchPostsSuccess]: (state, {payload}) => {
+		const newState = {...state};
+
+		const postsToAdd = payload.reduce((carry, post) => {
+			if (!newState.postsById[post.id]) {
+				carry.push(post);
+				newState.postsById[post.id] = 1;
+			}
+
+			return carry;
+		}, []);
+
+		newState.posts = newState.posts.concat(postsToAdd);
+
+		return newState;
+	},
+	[actions.fetchPostsError]: (state, action) => ({...state, postsLoading: false}),
+	[actions.selectPost]: (state, action) => ({...state, currentPostId: action.payload})
 }, initialState);

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import GeminiScrollbar from 'react-gemini-scrollbar';
+import GeminiScrollbar from 'react-gemini-scrollbar';
 
 import Group from './Group.js';
 
@@ -14,9 +14,9 @@ export class Feeds extends React.Component {
     render() {
         return (
             <div className='feeds'>
-				{/*<GeminiScrollbar>*/}
+				<GeminiScrollbar>
                     {this.props.feeds.map((group, index) => <Group key={index} {...group} />)}
-				{/*</GeminiScrollbar>*/}
+				</GeminiScrollbar>
             </div>
         );
     }

@@ -9,7 +9,7 @@
     "test:watch": "npm run test -- --watch",
     "start": "babel-node ./server/server-prod.js",
     "dev": "better-npm-run dev",
-    "devmon": "nodemon --exec better-npm-run dev",
+    "devmon": "nodemon --ignore ./src --exec better-npm-run dev",
     "build": "npm run lint && better-npm-run build",
     "dll:dev": "better-npm-run dll:dev",
     "dll:prod": "better-npm-run dll:prod",
@@ -17,6 +17,9 @@
     "postinstall": "npm run dll",
     "postuninstall": "npm run dll",
     "webpack": "babel-node node_modules/webpack/bin/webpack.js"
+  },
+  "engines": {
+    "node" : ">=6.10.0"
   },
   "betterScripts": {
     "dev": {

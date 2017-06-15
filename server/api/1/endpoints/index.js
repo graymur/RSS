@@ -4,4 +4,6 @@ export { default as feeds } from './feeds';
 export { default as fetch } from './fetch';
 export { default as markRead } from './markRead';
 export { default as save } from './save';
-export { default as update } from './update';
+export { default as updateFeedPosts } from './updateFeedPosts';
+export { default as groupPosts } from './groupPosts';
+export { default as posts } from './posts';

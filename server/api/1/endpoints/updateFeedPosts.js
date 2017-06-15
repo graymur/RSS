@@ -7,7 +7,9 @@ export default async function (req, res) {
 	try {
 		let feed = await FeedModel.findOne({user: req.user._id, _id: req.query.id});
 
-		if (!feed) throw new Error('Feed not found');
+		if (!feed) {
+			throw new Error('Feed not found');
+		}
 
 		const promise = new Promise((resolve, reject) => {
 			parser.parseURL(feed.url, (err, parsed) => {
@@ -50,10 +52,10 @@ export default async function (req, res) {
 			feed: feed.id
 		}).sort([['date', 'descending']]);
 
-		feed = toCleanObject(feed);
-		feed.posts = posts.map(toCleanObject);
-
-		return res.send(feed);
+		return res.send({
+			feed: toCleanObject(feed),
+			posts: posts.map(toCleanObject)
+		});
 	} catch (e) {
 		return res.status(500).send({error: e.toString()});
 	}

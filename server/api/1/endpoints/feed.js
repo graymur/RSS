@@ -7,10 +7,10 @@ export default async function feed(req, res) {
 		let feed = await FeedModel.findOne({user: req.user._id, _id: req.query.id});
 		const posts = await PostModel.find({feed: feed._id}).sort([['date', 'descending']]);
 
-		feed = toCleanObject(['realTitle'])(feed);
-		feed.posts = posts.map(toCleanObject);
+		// feed = toCleanObject(['realTitle'])(feed);
+		// feed.posts = posts.map(toCleanObject);
 
-		return res.send(feed);
+		return res.send(posts.map(toCleanObject));
 	} catch (e) {
 		return res.status(500).send({error: e.toString()});
 	}
