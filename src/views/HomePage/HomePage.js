@@ -74,7 +74,6 @@ export class HomePage extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-    // feeds: selectors.selectFeeds(),
     feedsByGroups: selectors.selectFeedsByGroups()
 });
 

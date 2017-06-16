@@ -7,13 +7,9 @@ export const fetchFeedsError = createAction('HomePage.fetchFeedsError', error =>
 export const selectGroup = createAction('HomePage.selectGroup', id => id);
 
 export const selectFeed = createAction('HomePage.selectFeed', id => id);
-export const fetchFeedSuccess = createAction('HomePage.fetchFeedSuccess', feed => feed);
-
-export const updateFeedPosts = createAction('HomePage.updateFeedPosts', id => id);
-
 export const updateFeedData = createAction('HomePage.updateFeedData', feed => feed);
 export const updateFeedError = createAction('HomePage.updateFeedError', error => error);
-export const setCurrentPosts = createAction('HomePage.setCurrentPosts', posts => posts);
+export const updateFeedPosts = createAction('HomePage.updateFeedPosts', id => id);
 
 export const fetchPostsStart = createAction('HomePage.fetchPostsStart', () => {});
 export const fetchPostsSuccess = createAction('HomePage.fetchPostsSuccess', posts => posts);

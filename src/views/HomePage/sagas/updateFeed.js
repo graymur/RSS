@@ -14,7 +14,7 @@ export function * updateFeed({payload: id}) {
 			throw new Error(result.error);
 		}
 
-		yield put(actions.fetchFeedSuccess(result));
+		yield put(actions.updateFeedData(result));
 	} catch (e) {
 		yield put(actions.updateFeedError(e));
 	} finally {

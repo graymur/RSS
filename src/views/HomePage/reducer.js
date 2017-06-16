@@ -17,13 +17,6 @@ const initialState = {
 export default handleActions({
 	[actions.fetchFeedsSuccess]: (state, action) => ({...state, feeds: action.payload.feeds, groups: action.payload.groups}),
 	[actions.selectFeed]: (state, {payload}) => ({...state, currentFeedId: payload, currentGroupId: undefined}),
-	[actions.fetchFeedSuccess]: (state, action) => {
-		const feedIndex = findIndex(state.feeds, {id: action.payload.id});
-		const feeds = [...state.feeds];
-		feeds[feedIndex] = action.payload;
-
-		return {...state, feeds};
-	},
 	[actions.markRead]: (state, {payload: {feedId, id}}) => {
 		const feeds = [...state.feeds];
 		const feedIndex = findIndex(feeds, {id: feedId});
@@ -53,7 +46,6 @@ export default handleActions({
 		if (feedIndex < 0) {
 			feeds.push(payload);
 		} else {
-			payload.posts = feeds[feedIndex].posts;
 			feeds[feedIndex] = payload;
 		}
 

@@ -13,7 +13,7 @@ export function * updateFeedPosts({payload: id}) {
 		}
 
 		yield put(actions.fetchPostsSuccess(result.posts));
-		yield put(actions.fetchFeedSuccess(result.feed));
+		yield put(actions.updateFeedData(result.feed));
 	} catch (e) {
 		yield put(actions.fetchPostsError(e));
 	} finally {

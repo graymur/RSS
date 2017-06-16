@@ -16,10 +16,7 @@ export const selectFeedsByGroups = () => createSelector(
 	[selectGroups(), selectFeeds()],
 	(groups, feeds) => {
 		return groups.map(group => {
-			group.feeds = feeds.filter(feed => {
-				return String(feed.group) === String(group.id);
-			});
-
+			group.feeds = feeds.filter(feed => feed.group === group.id);
 			return group;
 		});
 	}
@@ -76,9 +73,7 @@ export const selectCurrentPost = () => createSelector(
 	[selectCurrentPosts(), selectCurrentPostId()],
 	(posts, currentPostId) => {
 		if (!currentPostId) return false;
-
-		const found = (posts || []).filter(post => post.id === currentPostId);
-		return found.length ? found[0] : false;
+		return posts.find(post => post.id === currentPostId);
 	}
 );
 
