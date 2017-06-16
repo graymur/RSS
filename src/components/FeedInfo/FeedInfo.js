@@ -25,7 +25,7 @@ export class FeedInfo extends React.PureComponent {
 		return (
 			<div className='feed-info'>
 				<input value={feed.url} className='url form-control' readOnly={Boolean(true)}/>
-				<a href='#' onClick={() => updateFeedPosts(feed.id)} className='item btn btn-default' role='button'>Update feed</a>
+				<a href='#' onClick={() => updateFeedPosts(feed.id)} className='item btn btn-default' role='button'>Fetch posts</a>
 				<Link to={`/form/${feed.id}`} className='item btn btn-default' role='button'>
 					Edit feed
 				</Link>

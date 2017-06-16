@@ -6,7 +6,7 @@ import api from 'utils/api';
 
 export function * updateFeed({payload: id}) {
 	try {
-		yield put(actions.fetchFeedStart(id));
+		yield put(actions.fetchPostsStart());
 
 		const result = yield call(api.updateFeed, id);
 
@@ -16,10 +16,9 @@ export function * updateFeed({payload: id}) {
 
 		yield put(actions.fetchFeedSuccess(result));
 	} catch (e) {
-		console.log('updateFeed ERROR', e);
 		yield put(actions.updateFeedError(e));
 	} finally {
-		yield put(actions.fetchFeedEnd(id));
+		yield put(actions.fetchPostsEnd());
 	}
 }
 

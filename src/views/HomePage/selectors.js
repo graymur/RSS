@@ -32,7 +32,7 @@ export const selectPostsLoading = () => createSelector(
 
 export const selectPosts = () => createSelector(
 	selectHome(),
-	homeState => (homeState && homeState.posts) || []
+	homeState => homeState.posts
 );
 
 export const selectCurrentFeedId = () => createSelector(
@@ -53,16 +53,22 @@ export const selectCurrentPostId = () => createSelector(
 	homeState => homeState.currentPostId
 );
 
+/**
+ * TODO: add custom memoization
+ */
 export const selectCurrentPosts = () => createSelector(
-	[selectPosts(), selectCurrentFeedId(), selectCurrentGroupId()],
-	(posts, currentFeedId, currentGroupId) => {
+	[selectPosts(), selectCurrentFeedId(), selectCurrentGroupId(), selectFeeds()],
+	(posts, currentFeedId, currentGroupId, feeds) => {
+		let currentPosts = [];
 		if (currentFeedId) {
-			return posts.filter(x => x.feed === currentFeedId);
+			currentPosts = posts.filter(x => x.feed === currentFeedId);
 		} else if (currentGroupId) {
-			return [];
+			const feedsIds = feeds.filter(feed => feed.group === currentGroupId).map(feed => feed.id);
+			currentPosts = posts.filter(post => feedsIds.includes(post.feed));
 		}
 
-		return [];
+		currentPosts = currentPosts.sort((a, b) => a.date < b.date);
+		return currentPosts;
 	}
 );
 

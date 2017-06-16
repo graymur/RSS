@@ -36,6 +36,8 @@ export class Feed extends React.Component {
 		const {loading, feed, posts, selectPost, currentPostId} = this.props;
 		const showUpdateInfo = Boolean(!loading && feed && !posts.length);
 
+		console.log('RENDER Feed');
+
 		return (
 			<div className='feed' key={posts.length}>
 				{ loading ? <Centered><Loader size={100}/></Centered> : null }

@@ -16,47 +16,35 @@ const initialState = {
 
 export default handleActions({
 	[actions.fetchFeedsSuccess]: (state, action) => ({...state, feeds: action.payload.feeds, groups: action.payload.groups}),
-
 	[actions.selectFeed]: (state, {payload}) => ({...state, currentFeedId: payload, currentGroupId: undefined}),
-	// [actions.fetchFeed]: (state, action) => {
-	// 	return {...state, currentPost: false};
-	// },
-	// [actions.fetchFeedStart]: (state, action) => {
-	// 	const feedIndex = findIndex(state.feeds, {id: action.payload});
-	// 	const feeds = [...state.feeds];
-	// 	feeds[feedIndex].loading = true;
-	//
-	// 	return {...state, feeds, postsLoading: true};
-	// },
-	// [actions.fetchFeedEnd]: (state, action) => {
-	// 	return state;
-	// },
-	// [actions.fetchFeedSuccess]: (state, action) => {
-	// 	const feedIndex = findIndex(state.feeds, {id: action.payload.id});
-	// 	const feeds = [...state.feeds];
-	// 	feeds[feedIndex] = action.payload;
-	//
-	// 	return {...state, feeds, postsLoading: false, currentFeedId: action.payload.id, currentGroupId: ''};
-	// },
+	[actions.fetchFeedSuccess]: (state, action) => {
+		const feedIndex = findIndex(state.feeds, {id: action.payload.id});
+		const feeds = [...state.feeds];
+		feeds[feedIndex] = action.payload;
+
+		return {...state, feeds};
+	},
 	[actions.markRead]: (state, {payload: {feedId, id}}) => {
 		const feeds = [...state.feeds];
 		const feedIndex = findIndex(feeds, {id: feedId});
-		feeds[feedIndex].posts = [...feeds[feedIndex].posts];
-		const postIndex = findIndex(feeds[feedIndex].posts, {id});
-		feeds[feedIndex].posts[postIndex].read = true;
 		feeds[feedIndex].unread -= 1;
 
-		return {...state, feeds: feeds, posts: feeds[feedIndex].posts};
+		const posts = [...state.posts];
+		const postIndex = findIndex(posts, {id: id});
+		posts[postIndex].read = true;
+
+		return {...state, feeds, posts};
 	},
 	[actions.markReadError]: (state, {payload: {feedId, id}}) => {
 		const feeds = [...state.feeds];
 		const feedIndex = findIndex(feeds, {id: feedId});
-		feeds[feedIndex].posts = [...feeds[feedIndex].posts];
-		const postIndex = findIndex(feeds[feedIndex].posts, {id});
-		feeds[feedIndex].posts[postIndex].read = false;
 		feeds[feedIndex].unread += 1;
 
-		return {...state, feeds: feeds, posts: feeds[feedIndex].posts};
+		const posts = [...state.posts];
+		const postIndex = findIndex(posts, {id: id});
+		posts[postIndex].read = false;
+
+		return {...state, feeds, posts};
 	},
 	[actions.updateFeedData]: (state, {payload}) => {
 		const feeds = [...state.feeds];
