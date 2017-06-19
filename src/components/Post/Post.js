@@ -32,6 +32,10 @@ class Post extends React.PureComponent {
 	render() {
 		const {post} = this.props;
 
+		if (!post) {
+			return null;
+		}
+
 		return (
 			<div className='post' key={post.id}>
 				<GeminiScrollbar>

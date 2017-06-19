@@ -5,7 +5,7 @@ import * as actions from '../actions.js';
 
 import api from 'utils/api';
 
-export function * fetchFeeds(action) {
+export function * fetchFeeds() {
 	try {
 		yield put(loadingStart());
 

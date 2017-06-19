@@ -64,7 +64,6 @@ export const selectCurrentPosts = () => createSelector(
 			currentPosts = posts.filter(post => feedsIds.includes(post.feed));
 		}
 
-		// currentPosts = currentPosts.sort((a, b) => a.date < b.date);
 		return currentPosts;
 	}
 );
@@ -80,4 +79,9 @@ export const selectCurrentPost = () => createSelector(
 export const selectCurrentGroupId = id => createSelector(
 	selectHome(),
 	homeState => homeState.currentGroupId
+);
+
+export const selectCurrentGroup = id => createSelector(
+	[selectGroups(), selectCurrentGroupId()],
+	(groups, currentGroupId) => groups.find(group => group.id === currentGroupId)
 );
