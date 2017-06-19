@@ -52,7 +52,6 @@ export default handleActions({
 		return {...state, feeds: feeds};
 	},
 	[actions.selectGroup]: (state, {payload}) => ({...state, currentGroupId: payload, currentFeedId: undefined, currentPostId: undefined}),
-
 	[actions.fetchPostsStart]: (state, action) => ({...state, postsLoading: true}),
 	[actions.fetchPostsEnd]: (state, action) => ({...state, postsLoading: false}),
 	[actions.fetchPostsSuccess]: (state, {payload}) => {
@@ -67,7 +66,9 @@ export default handleActions({
 			return carry;
 		}, []);
 
-		newState.posts = newState.posts.concat(postsToAdd);
+		if (postsToAdd.length) {
+			newState.posts = newState.posts.concat(postsToAdd).sort((a, b) => a.date < b.date);
+		}
 
 		return newState;
 	},

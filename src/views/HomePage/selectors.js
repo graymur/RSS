@@ -64,7 +64,7 @@ export const selectCurrentPosts = () => createSelector(
 			currentPosts = posts.filter(post => feedsIds.includes(post.feed));
 		}
 
-		currentPosts = currentPosts.sort((a, b) => a.date < b.date);
+		// currentPosts = currentPosts.sort((a, b) => a.date < b.date);
 		return currentPosts;
 	}
 );
