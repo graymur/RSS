@@ -5,6 +5,7 @@ export const fetchFeedsSuccess = createAction('HomePage.fetchFeedsSuccess', (fee
 export const fetchFeedsError = createAction('HomePage.fetchFeedsError', error => error);
 
 export const selectGroup = createAction('HomePage.selectGroup', id => id);
+export const updateGroupData = createAction('HomePage.updateGroupData', group => group);
 
 export const selectFeed = createAction('HomePage.selectFeed', id => id);
 export const updateFeedData = createAction('HomePage.updateFeedData', feed => feed);

@@ -49,9 +49,21 @@ export default handleActions({
 			feeds[feedIndex] = payload;
 		}
 
-		return {...state, feeds: feeds};
+		return {...state, feeds};
 	},
 	[actions.selectGroup]: (state, {payload}) => ({...state, currentGroupId: payload, currentFeedId: undefined, currentPostId: undefined}),
+	[actions.updateGroupData]: (state, {payload}) => {
+		const groups = [...state.groups];
+		let groupIndex = findIndex(groups, {id: payload.id});
+
+		if (groupIndex < 0) {
+			groups.push(payload);
+		} else {
+			groups[groupIndex] = payload;
+		}
+
+		return {...state, groups};
+	},
 	[actions.fetchPostsStart]: (state, action) => ({...state, postsLoading: true}),
 	[actions.fetchPostsEnd]: (state, action) => ({...state, postsLoading: false}),
 	[actions.fetchPostsSuccess]: (state, {payload}) => {

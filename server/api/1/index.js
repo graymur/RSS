@@ -15,5 +15,6 @@ router.put('/save', checkAuth, handlers.save);
 router.post('/mark-read', checkAuth, handlers.markRead);
 router.get('/group-posts', checkAuth, handlers.groupPosts);
 router.get('/posts', checkAuth, handlers.posts);
+router.post('/group', checkAuth, handlers.group);
 
 export default router;

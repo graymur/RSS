@@ -31,5 +31,5 @@ app.use((req, res) => {
 
 app.listen(config.devPort, () => {
 	console.log(`Listening at ${config.host}:${config.devPort}`);
-	opener(`http://${config.host}:${config.devPort}`);
+	// opener(`http://${config.host}:${config.devPort}`);
 });
