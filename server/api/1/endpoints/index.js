@@ -8,3 +8,4 @@ export {default as updateFeedPosts} from './updateFeedPosts';
 export {default as groupPosts} from './groupPosts';
 export {default as posts} from './posts';
 export {default as group} from './group';
+export {default as moveFeedToGroup} from './moveFeedToGroup';

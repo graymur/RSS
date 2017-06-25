@@ -34,6 +34,7 @@ export default async function save(req, res) {
 			response.error = 'Unknown error';
 		}
 
-		return res.status(500).send({error: e.toString()});
+		res.statusMessage = response.error;
+		return res.status(500).end();
 	}
 }

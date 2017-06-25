@@ -24,5 +24,6 @@ export default {
 	updateFeedPosts: id => makeRequest('update-feed-posts', {id}),
 	markRead: (id, feedId) => makeRequest('mark-read', {id, feedId}, {method: 'POST'}),
 	posts: config => makeRequest('posts', config),
-	saveGroup: data => makeRequest('group', data, {method: 'POST'})
+	saveGroup: data => makeRequest('group', data, {method: 'POST'}),
+	moveFeedToGroup: config => makeRequest('move-feed', config, {method: 'POST'})
 };

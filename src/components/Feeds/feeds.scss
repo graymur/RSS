@@ -7,6 +7,11 @@
 
 	&__group {
 		padding: 1rem;
+		transition: all 0.2s;
+
+		&._highlighted {
+			background: #ececec;
+		}
 
 		&__title {
 			margin-top: 0;

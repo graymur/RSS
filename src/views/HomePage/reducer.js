@@ -11,7 +11,8 @@ const initialState = {
 	currentGroupId: undefined,
 	currentFeedId: undefined,
 	currentPostId: undefined,
-	postsLoading: false
+	postsLoading: false,
+	groupsIdsToBeDroppedOn: []
 };
 
 export default handleActions({
@@ -85,5 +86,14 @@ export default handleActions({
 		return newState;
 	},
 	[actions.fetchPostsError]: (state, action) => ({...state, postsLoading: false}),
-	[actions.selectPost]: (state, action) => ({...state, currentPostId: action.payload})
+	[actions.selectPost]: (state, action) => ({...state, currentPostId: action.payload}),
+	[actions.setGroupsIdsToBeDroppedOn]: (state, {payload}) => ({...state, groupsIdsToBeDroppedOn: payload}),
+	[actions.feedDragEnd]: state => ({...state, groupsIdsToBeDroppedOn: []}),
+	[actions.moveFeedToGroup]: (state, {payload: {feedId, groupId}}) => {
+		const feeds = [...state.feeds];
+		let feedIndex = findIndex(feeds, {id: feedId});
+
+		feeds[feedIndex].group = groupId;
+		return {...state, feeds, groupsIdsToBeDroppedOn: []};
+	}
 }, initialState);

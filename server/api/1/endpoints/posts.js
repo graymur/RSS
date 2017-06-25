@@ -27,6 +27,7 @@ export default async function feed(req, res) {
 
 		return res.send(posts.map(toCleanObject));
 	} catch (e) {
-		return res.status(500).send({error: e.toString()});
+		res.statusMessage = e.toString();
+		return res.status(500).end();
 	}
 }

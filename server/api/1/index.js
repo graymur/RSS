@@ -16,5 +16,6 @@ router.post('/mark-read', checkAuth, handlers.markRead);
 router.get('/group-posts', checkAuth, handlers.groupPosts);
 router.get('/posts', checkAuth, handlers.posts);
 router.post('/group', checkAuth, handlers.group);
+router.post('/move-feed', checkAuth, handlers.moveFeedToGroup);
 
 export default router;

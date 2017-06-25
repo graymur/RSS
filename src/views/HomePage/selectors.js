@@ -76,12 +76,17 @@ export const selectCurrentPost = () => createSelector(
 	}
 );
 
-export const selectCurrentGroupId = id => createSelector(
+export const selectCurrentGroupId = () => createSelector(
 	selectHome(),
 	homeState => homeState.currentGroupId
 );
 
-export const selectCurrentGroup = id => createSelector(
+export const selectCurrentGroup = () => createSelector(
 	[selectGroups(), selectCurrentGroupId()],
 	(groups, currentGroupId) => groups.find(group => group.id === currentGroupId)
+);
+
+export const selectGroupsIdsToBeDroppedOn = () => createSelector(
+	selectHome(),
+	homeState => homeState.groupsIdsToBeDroppedOn
 );

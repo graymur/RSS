@@ -16,6 +16,7 @@ export default async function markRead(req, res) {
 
 		return res.send({ count: feed.count, unread: feed.unread });
 	} catch (e) {
-		return res.status(500).send({error: e.toString()});
+		res.statusMessage = e.toString();
+		return res.status(500).end();
 	}
 }

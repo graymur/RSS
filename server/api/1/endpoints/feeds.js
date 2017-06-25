@@ -9,6 +9,7 @@ export default async function feeds(req, res) {
 			feeds: (await FeedModel.find({ user: req.user._id })).map(toCleanObject)
 		});
 	} catch (e) {
-		return res.status(500).send({error: e.toString()});
+		res.statusMessage = e.toString();
+		return res.status(500).end();
 	}
 }

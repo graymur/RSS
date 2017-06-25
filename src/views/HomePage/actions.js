@@ -20,3 +20,8 @@ export const fetchPostsEnd = createAction('HomePage.fetchPostsEnd', () => {});
 export const selectPost = createAction('HomePage.selectPost', id => id);
 export const markRead = createAction('HomePage.markRead', (id, feedId) => ({ id, feedId }));
 export const markReadError = createAction('HomePage.markReadError', (id, feedId, error) => ({ id, feedId, error }));
+
+export const feedDragStart = createAction('HomePage.feedDragStart', id => id);
+export const feedDragEnd = createAction('HomePage.feedDragEnd', id => id);
+export const setGroupsIdsToBeDroppedOn = createAction('HomePage.setGroupsIdsToBeDroppedOn', ids => ids);
+export const moveFeedToGroup = createAction('HomePage.moveFeedToGroup', (feedId, groupId) => ({ feedId, groupId }));
