@@ -1,8 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'style/main.scss';
 
-import idx from 'idx';
-
 import {Provider} from 'react-redux';
 import createStore from 'redux/createStore';
 

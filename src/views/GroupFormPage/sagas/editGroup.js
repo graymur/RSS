@@ -13,8 +13,6 @@ export function * editGroup({payload}) {
 	try {
 		let groups = yield select(selectGroups());
 
-		console.dir(groups);
-
 		if (!groups || groups.length === 0) {
 			yield * fetchFeeds();
 			groups = yield select(selectGroups());
@@ -29,7 +27,6 @@ export function * editGroup({payload}) {
 		yield put(actions.clearGroupData());
 		yield put(actions.setGroupToEdit(group));
 	} catch (e) {
-		console.log(e);
 		yield put(actions.saveGroupFailure(e));
 	}
 }

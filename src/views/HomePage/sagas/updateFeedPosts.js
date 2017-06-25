@@ -22,9 +22,5 @@ export function * updateFeedPosts({payload: id}) {
 }
 
 export default function * updateFeedPostsSaga() {
-	try {
-		yield takeLatest(actions.updateFeedPosts.toString(), updateFeedPosts);
-	} catch (e) {
-		console.log(e.message);
-	}
+	yield takeLatest(actions.updateFeedPosts.toString(), updateFeedPosts);
 }

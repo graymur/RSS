@@ -12,15 +12,15 @@ import api from 'utils/api.js';
  */
 export function * saveFeed(action) {
 	try {
-		const data = yield call(api.saveFeed, action.payload);
+		const response = yield call(api.saveFeed, action.payload);
 
-		if (data.error) {
-			throw new Error(data.error);
+		if (response.error) {
+			throw new Error(response.error);
 		}
 
-		yield put(actions.setFeedToEdit(data.feed));
-		yield put(updateFeedData(data.feed));
-		yield put(actions.saveFeedSuccess(data));
+		yield put(actions.setFeedToEdit(response.feed));
+		yield put(updateFeedData(response.feed));
+		yield put(actions.saveFeedSuccess(response));
 	} catch (e) {
 		yield put(actions.saveFeedFailure(e));
 	}

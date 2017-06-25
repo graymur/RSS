@@ -4,7 +4,7 @@ import {createStructuredSelector} from 'reselect';
 import {connect} from 'react-redux';
 import * as selectors from './selectors';
 import Loader from 'components/Loader/Loader';
-import ErrorElement from './ErrorElement.js';
+import ErrorElement from 'components/ErrorElement.js';
 import {checkFeed, resetFeed, saveFeed, editFeed, clearFeedData} from './actions';
 import idx from 'idx';
 import {Link} from 'react-router-dom';
