@@ -12,3 +12,4 @@ require('redux');
 require('redux-actions');
 require('redux-saga');
 require('reselect');
+require('redbox-react');
