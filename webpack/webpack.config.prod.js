@@ -7,6 +7,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import htmlPlugin from './util/html-plugin';
 import uglifyPlugin from './util/uglify-plugin';
 import baseWebpackConfig from './webpack.config.base';
+import webpack from 'webpack';
 
 const productionConfig = merge(
 	baseWebpackConfig,
@@ -21,7 +22,8 @@ const productionConfig = merge(
 			}]),
 			new ExtractTextPlugin('styles.css'),
 			htmlPlugin,
-			uglifyPlugin
+			uglifyPlugin,
+			new webpack.optimize.ModuleConcatenationPlugin()
 		]
 	}
 );

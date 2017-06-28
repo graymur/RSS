@@ -16,6 +16,7 @@ class Item extends React.PureComponent {
 		title: PropTypes.string,
 		count: PropTypes.number.isRequired,
 		unread: PropTypes.number.isRequired,
+		selectFeed: PropTypes.func.isRequired,
 		feedDragStart: PropTypes.func.isRequired,
 		feedDragEnd: PropTypes.func.isRequired,
 		currentFeedId: PropTypes.string,

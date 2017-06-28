@@ -1,6 +1,6 @@
 import {UserModel} from '../models/user';
-import jwt from 'jsonwebtoken';
-import jwtOptions from '../config/jwtOptions';
+// import jwt from 'jsonwebtoken';
+// import jwtOptions from '../config/jwtOptions';
 
 export default async function checkAuth(req, res, next) {
 	req.user = await UserModel.findOne({_id: '5908a17c82131021d4725d77'});
